@@ -388,7 +388,7 @@ function selectTool_circIntersectsRect(p1, r, x0, y0, x1, y1) {
 }
 
 function selectTool_addInvisibleGlow(aamapObject) {
-    aamapObject.glowObj = aamapObject.obj.glow({color: "#FFFFFF", width:2});
+    aamapObject.glowObj = aamapObject.obj.glow({color: config_isDark?"#000000":"#FFFFFF", width:2});
 }
 
 function selectTool_removeInvisibleGlow(aamapObject) {
