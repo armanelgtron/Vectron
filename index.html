@@ -1,0 +1,168 @@
+<html>  
+    <head>  
+        <title>Vectron</title>
+
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400,300,700,600' rel='stylesheet' type='text/css'>
+        <link href="./css/bootstrap.min.css" rel="stylesheet">
+        <link href="./css/vectron.css" rel="stylesheet">
+    </head>
+    <body class="noscroll">
+        <div id="control_box">
+            <h1>Vectron <small>Map editor</small></h1>
+            <div id="gui-content">
+                <ul id="gui-tab" class="nav nav-tabs">
+                    <li class="active"><a href="#gui-general" data-toggle="tab">General</a></li>
+                    <li><a href="#gui-settings" data-toggle="tab">Settings</a></li>
+                    <li class="dropdown">
+                        <a href="#" id="gui-dropdown" class="dropdown-toggle" data-toggle="dropdown">Tool Controls <b class="caret"></b></a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="gui-dropdown">
+                            <li><a href="#gui-wt" tabindex="-1" data-toggle="tab">Wall Tool</a></li>
+                            <li><a href="#gui-zt" tabindex="-1" data-toggle="tab">Zone Tool</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div id="gui-tab-content" class="tab-content">
+
+                    <div class="tab-pane fade in active" id="gui-general">
+
+                        <input type="file" id="files" name="file" />
+                        <div id="progress_bar"><div class="percent">0%</div></div>
+                    </div>
+
+                    <div class="tab-pane fade" id="gui-settings">
+
+                    </div>
+
+                    <div class="tab-pane fade" id="gui-wt">
+                        <h4 class="gui-tool-name">Wall Tool</h4>
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td><strong>Click</strong></td>
+                                    <td>Place WallPoint</td>
+                                    <td>Start new Wall</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Double Click</strong></td>
+                                    <td>Place EndPoint</td>
+                                    <td>End Wall</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="tab-pane fade" id="gui-zt">
+                        <h4 class="gui-tool-name">Zone Tool</h4>
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td><strong>+/-</strong></td>
+                                    <td>Increase Zone Radius</td>
+                                    <td>Decrease Zone Radius</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Click</strong></td>
+                                    <td>Place new Zone</td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <button type="button" id="gui-save" data-loading-text="Saving..." class="btn btn-primary">Save</button>
+            <button id="gui-close" type="button" class="btn btn-primary">Close</button>
+
+        </div>
+        <div id="canvas_container"></div>
+        <div id="debug_box">
+            <div id="debug_stream">
+            </div>
+            <div id="branding_box">
+                <h4 id="branding">Vectron <small> 0.1</small></h4>
+                <small><small>With love &lt;3</small></small>
+            </div>
+        </div>
+        <div id="tool_bar">
+            <ul>
+                <li>
+                    <a id="toolbar-gui-open" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Settings and Controls"></a>
+                    <a id="toolbar-gui-close" href="#" rel="tooltip" data-trigger="hover" data-placement="right" style="display:none;" data-original-title="Settings and Controls"></a>
+                </li>
+            </ul>
+
+            <ul>
+                <li>
+                    <a class="toolimg" id="toolbar-toolSelect" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Select Tool"></a>
+                </li>
+            </ul>
+
+           <!-- <ul>
+                <li>
+                    <a class="toolimg" id="toolbar-toolWall" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Wall Tool"></a>
+                </li>
+            </ul>-->
+            <ul id="zone-base" class="single-item">
+            	<li>
+                    <a class="toolimg" id="toolbar-toolWall" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Wall Tool"></a>
+                </li>
+                <li>
+                    <a id="toolbar-toolZone" href="#"></a>
+                </li>
+                <div id="zones-menu" style="display:none;">
+                    <li>
+                        <a id="toolbar-toolZone-death" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Death"></a>
+                    </li>
+                    <li>
+                        <a id="toolbar-toolZone-win" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Win"></a>
+                    </li>
+                    <li>
+                        <a id="toolbar-toolZone-target" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Target"></a>
+                    </li>
+                    <li>
+                        <a id="toolbar-toolZone-fortress" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Fortress"></a>
+                    </li>
+                    <li>
+                        <a class="toolzoneimg" id="toolbar-toolZone-rubber" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Rubber"></a>
+                    </li>
+                </div>
+           <!-- </ul>
+            <ul>-->
+                <li>
+                    <a id="toolbar-toolSpawn" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Spawn tool"></a>
+                </li>
+            </ul>
+            <ul>
+                <li id="toolbar-toolLock-list">
+                    <a id="toolbar-toolLock" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Snap-locked"></a>
+                </li>
+                <li id="toolbar-toolUnlock-list">
+                    <a id="toolbar-toolUnlock" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Snap-unlocked"></a>
+                </li>
+                <li>
+                    <a id="toolbar-toolZoomIn" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Zoom In"></a>
+                </li>
+                <li>
+                    <a id="toolbar-toolZoomOut" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Zoom Out"></a>
+                </li>
+             </ul>
+             <ul>
+                <li>
+                    <a id="toolbar-toolScaleUp" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Scale Up"></a>
+                </li>
+                <li>
+                    <a id="toolbar-toolScaleDown" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Scale Down"></a>
+                </li>                
+            </ul>
+            <ul>
+                <li>
+                    <a id="toolbar-disconnect" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Cancel or Delete Last Object.">&cross;</a>
+                </li>
+            </ul>
+        </div>
+        <script type="text/javascript" data-main="js/main.js" src="js/libs/require.min.js"></script>
+    </body>  
+</html>
