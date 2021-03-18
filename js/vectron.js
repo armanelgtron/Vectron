@@ -86,8 +86,8 @@ function vectron_render() {
 
     document.getElementById("zoom").innerText = vectron_zoom;
     
-    document.getElementById("anchor-x").innerText = vectron_panX;
-    document.getElementById("anchor-y").innerText = vectron_panY;
+    document.getElementById("anchor-x").innerText = -(vectron_panX);
+    document.getElementById("anchor-y").innerText = -(vectron_panY);
 
 }
 

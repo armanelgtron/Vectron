@@ -66,6 +66,9 @@ function cursor_render(newX, newY, spacing) {
     cursor_neverSnappedX = newX;
     cursor_neverSnappedY = newY;
 
+    document.getElementById("cursor-x").innerText = aamap_mapX(cursor_active?cursor_realX:newX);
+    document.getElementById("cursor-y").innerText = aamap_mapY(cursor_active?cursor_realY:newY);
+
     if(!cursor_active) return;
 
     cursor_obj = vectron_screen.path(
@@ -81,9 +84,6 @@ function cursor_render(newX, newY, spacing) {
     );
     if(config_isDark)
         cursor_obj.attr({stroke:"#fff"});
-
-    document.getElementById("cursor-x").innerText = cursor_realX;
-    document.getElementById("cursor-y").innerText = cursor_realY;
 }
 
 function cursor_show() {
