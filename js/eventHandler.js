@@ -255,6 +255,7 @@ function eventHandler_init() {
 
     $(".toolbar-toolZoomOut").mouseup(function(e) {
         if(vectron_zoom > 1) {
+            if(vectron_zoom == 2) vectron_zoom = 1;
             vectron_zoom /= 1.25;
         }
         vectron_zoom = Math.round(vectron_zoom);
