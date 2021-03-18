@@ -22,7 +22,7 @@ along with Vectron.  If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-function Zone(x, y, radius, type) {
+function Zone(x, y, radius, growth, type) {
 
     this.objectID = vectron_objectID;
     vectron_objectID++;
@@ -36,6 +36,7 @@ function Zone(x, y, radius, type) {
     this.x = x;
     this.y = y;
     this.radius = radius;
+    this.growth = growth;
 
     this.type = type;
 
@@ -63,6 +64,7 @@ function Zone(x, y, radius, type) {
         this.x *= factor;
         this.y *= factor;
         this.radius *= factor;
+        this.growth *= factor;
     }
 
     this.move = function(dx, dy) {
@@ -72,11 +74,11 @@ function Zone(x, y, radius, type) {
 
     this.getXML = function() {
         //<Zone effect=""><ShapeCircle radius="" growth=""><Point x="" y=""/></ShapeCircle></Zone>
-        return '<Zone effect="' + zoneTool_typeArray[this.type][0] +'"><ShapeCircle radius=" '+ this.radius +' " growth=""><Point x="' + this.x + '" y="' + this.y + '"/></ShapeCircle></Zone>';
+        return '<Zone effect="' + zoneTool_typeArray[this.type][0] +'"><ShapeCircle radius=" '+ this.radius +' " growth="'+this.growth+'"><Point x="' + this.x + '" y="' + this.y + '"/></ShapeCircle></Zone>';
     }
 
     this.outputFriendlyXML = function() {
-        gui_writeLog(escapeHtml('<Zone effect="' + zoneTool_typeArray[this.type][0] +'"><ShapeCircle radius=" '+ this.radius +' " growth=""><Point x="' + this.x + '" y="' + this.y + '"/></ShapeCircle></Zone>'));
+        gui_writeLog(escapeHtml('<Zone effect="' + zoneTool_typeArray[this.type][0] +'"><ShapeCircle radius=" '+ this.radius +' " growth="'+this.growth+'"><Point x="' + this.x + '" y="' + this.y + '"/></ShapeCircle></Zone>'));
     }
 
 } 

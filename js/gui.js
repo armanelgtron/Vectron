@@ -56,4 +56,7 @@ function gui_fillInput() {
     $("#map_category").val(xml_category);
     $("#map_version").val(xml_version)
     $("#map_dtd").val("sty.dtd");
+
+    $("#map_axes").val(xml_axes);
+    $("#map_settings").val(xml_settings.join("\n"));
 }

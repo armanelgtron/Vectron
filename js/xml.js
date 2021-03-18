@@ -29,6 +29,8 @@ var xml_dtd;
 var xml_version;
 var xml_category;
 var xml_wallheight = 4;
+var xml_axes = 4;
+var xml_settings = [];
 
 function xml_init() {
 
@@ -52,7 +54,19 @@ function xml_process(xml) {
     xml_author = resource.attr("author");
     xml_version = resource.attr("version");
     xml_category = resource.attr("category");
+
+    xml_settings.splice(0);
+    $(xml).find("Setting").each(function() {
+        xml_settings.push($(this).attr("name")+" "+$(this).attr("value"));
+    });
+
+    xml_axes = 4;
+    $(xml).find("Axes").each(function() {
+        xml_axes = parseInt($(this).attr("xml_axes"))||4;
+    });
+
     gui_fillInput();
+
 
     $(xml).find("Spawn").each(function() {
         var spawn = $(this);
@@ -76,12 +90,13 @@ function xml_process(xml) {
         var zone = $(this);
         var effect = zone.attr("effect");
         var radius = zone.find("ShapeCircle").attr("radius");
+        var growth = zone.find("ShapeCircle").attr("growth");
         x = zone.find("Point").attr("x");
         y = zone.find("Point").attr("y");
         ptsx.push(parseFloat(x));
         ptsy.push(parseFloat(y));
         aamap_add(
-            new Zone(parseFloat(x), parseFloat(y), parseFloat(radius), zoneTool_whatType[effect])
+            new Zone(parseFloat(x), parseFloat(y), parseFloat(radius), parseFloat(growth)||0, zoneTool_whatType[effect])
         );
     });
 

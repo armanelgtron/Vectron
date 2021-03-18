@@ -54,7 +54,7 @@ function Spawn() {
     }
 
     this.guideUpdate = function() {
-        var axes = 8;
+        var axes = parseInt($("#map_axes").val().trim());
 
         // get mouse cursor's distance from spawn's center
         var diffX = aamap_mapX(cursor_realX) - this.x;

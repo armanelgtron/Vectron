@@ -92,8 +92,10 @@ function eventHandler_init() {
         var mapCategory = $("#map_category").val().trim();
         var mapVersion = $("#map_version").val().trim();
         var mapDtd = $("#map_dtd").val().trim();
+        var mapAxes = parseInt($("#map_axes").val().trim());
+        var mapSets = $("#map_settings").val().split("\n");
 
-        aamap_save(mapName, mapAuthor, mapCategory, mapVersion, mapDtd);
+        aamap_save(mapName, mapAuthor, mapCategory, mapVersion, mapDtd, mapAxes, mapSets);
     });
 
     $("#gui-close").mouseup(function(e) {
