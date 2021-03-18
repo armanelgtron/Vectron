@@ -54,16 +54,31 @@ function config_load()
 
 function enable_dark_theme()
 {
-    document.getElementById("theme").href = "./css/vectron-dark.css";
-    config_isDark = true;
-    vectron_render();
+    var theme = document.getElementById("theme");
+    if("onload" in theme)
+    {
+        theme.onload = function()
+        {
+            config_isDark = true;
+            vectron_render();
+        };
+    }
+    else
+    {
+        config_isDark = true;
+        vectron_render();
+    }
+    theme.href = "./css/vectron-dark.css";
     
     document.getElementById("dark-theme").checked = true;
     localStorage.setItem("darkTheme","true");
 }
 function disable_dark_theme()
 {
-    document.getElementById("theme").href = "";
+    var theme = document.getElementById("theme");
+    if(theme.onload) theme.onload = null;
+    theme.href = "";
+    
     config_isDark = false;
     vectron_render();
     
