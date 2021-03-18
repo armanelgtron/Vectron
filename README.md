@@ -1,29 +1,14 @@
-# Vectron 2.0.2
+# Vectron 1.1
+
+A map editor for Armagetron Advanced.
+
+Originally created by Tristan Whitcher.
+
 
 ### Features legend:
 
 - *keyb shortcuts are written between [brackets]*
 - *'mod' means 'ctrl' (pc) or 'command' (mac)*
-
----
-
-# Essential features
-### DONE
-- map pan [space]
-- map zoom-in button [+] or mousewheel up
-- map zoom-out button [-] or mousewheel down
-- snap cursor to grid [x]
-
-### TODO
-- select/edit tool - [del] to remove
-- span tool
-- wall tool
-- zone tool
-- settings panel (use http://getbootstrap.com/javascript/#modals)
-- xml import
-- xml export
-- display different grid as zoom changes
-- ...
 
 ---
 
