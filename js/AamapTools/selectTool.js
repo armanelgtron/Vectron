@@ -73,7 +73,7 @@ function selectTool_disconnect() {
     cursor_active = true;
 
     for(var i = 0, ii = aamap_objects.length; i < ii; i++) {
-        selectTool_sets[i].unhover();
+        if(selectTool_sets[i]) selectTool_sets[i].unhover();
         selectTool_removeInvisibleGlow(aamap_objects[i]);
     }
     $(".toolbar-toolSelect").attr("style", "");
