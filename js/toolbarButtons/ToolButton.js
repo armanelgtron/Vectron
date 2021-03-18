@@ -3,6 +3,7 @@
 Vectron - map editor for Armagetron Advanced.
 Copyright (C) 2014  Tristan Whitcher    (tristan.whitcher@gmail.com)
 David Dubois        (ddubois@jotunstudios.com)
+Carlo Veneziano     (carlorfeo@gmail.com)
 ********************************************************************************
 
 This file is part of Vectron.
@@ -22,15 +23,34 @@ along with Vectron.  If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-define([], function() {
+define([
+    'toolbarButtons/BaseButton',
+    'Mediator'
+], function(BaseButton, Mediator) {
+    'use strict';
 
-    function ClassName() {
+    var ToolButton = BaseButton.extend({
+        /*
+        initialize: function (options) {
+            ToolButton.__super__.initialize.apply(this, arguments);
+        },
+        */
 
-    }
+        onClick: function () {
+            // ask for tool selection
+            Mediator.publish('tool:connect', this.name);
+        },
 
-    ClassName.prototype.method_name = function(first_argument) {
-        
-    };
+        subscriptions: {
+            'tool:status-changed': 'updateStatus'
+        },
 
-    return ClassName;
+        updateStatus: function (tool) {
+            if (tool.get('name') == this.name) {
+                this.setActive(tool.get('active'));
+            };
+        }
+    });
+
+    return ToolButton;
 });

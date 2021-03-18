@@ -24,33 +24,47 @@ along with Vectron.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 define([
-    'aamapObjects/AamapObject',
+    'aamapTools/SelectTool',
+    'aamapTools/SpawnTool',
+    'aamapTools/WallTool',
+    'aamapTools/ZoneTool',
     'Mediator'
-], function(AamapObject, Mediator) {
+], function(SelectTool, SpawnTool, WallTool, ZoneTool, Mediator) {
     'use strict';
 
-    var Aamap = Backbone.Collection.extend({
-        model: AamapObject,
+    var AamapTools = function() {
+        this.tools = {
+            select: new SelectTool(),
+            spawn: new SpawnTool(),
+            wall: new WallTool(),
+            zone: new ZoneTool()
+        };
 
-        initialize: function(options) {
-            
-        },
+        this.activeTool = null;
 
-        // override Collection.add
-        add: function (object) {
-            Aamap.__super__.add.apply(this, arguments);
+        Mediator.subscribe('tool:connect', this.selectTool, this);
+    }
 
-            Mediator.publish('aamap:addedObject', object);
+    AamapTools.prototype = {
+        selectTool: function (toolName) {
+            var tool = this.tools[toolName];
+
+            if (tool && tool.get('active') == false) { 
+                this.deselectCurrent();
+                this.activeTool = tool.set('active', true);
+            }
+
             return this;
         },
 
-        remove: function(object) {
-            Aamap.__super__.remove.apply(this, arguments);
-
-            Mediator.publish('aamap:removedObject', object);
-            return this;
+        deselectCurrent: function () {
+            if (this.activeTool) {
+                this.activeTool.set('active', false);
+                this.activeTool = null;
+            }
         }
-    });
+    };
 
-    return Aamap;
+    return AamapTools;
+
 });

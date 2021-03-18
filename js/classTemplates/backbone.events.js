@@ -23,16 +23,19 @@ along with Vectron.  If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-define(['Mediator'], function(Mediator) {
+define(['backbone'], function() {
     'use strict';
 
-	// Not used yet
+    function ClassName(options) {
 
-    var Cursor = Backbone.Model.extend({
-        initialize: function () {
-            
-        }
-    });
+    }
 
-    return Cursor;
+    ClassName.prototype = {
+        
+    };
+
+    // extend Backbone.Events
+    _.extend(ClassName.prototype, Backbone.Events);
+
+    return ClassName;
 });

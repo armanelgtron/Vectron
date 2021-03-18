@@ -23,16 +23,31 @@ along with Vectron.  If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-define(['Mediator'], function(Mediator) {
+define(['aamapObjects/AamapObject'], function(AamapObject) {
     'use strict';
 
-	// Not used yet
+    var zoneColors = {
+           death: '#ff0000', // red
+             win: '#00ff00', // green
+        fortress: '#62bef6', // lt blue
+          target: '#ff00ff', // purple
+          rubber: '#ff8800'  // orange
+    };
 
-    var Cursor = Backbone.Model.extend({
-        initialize: function () {
-            
+    var ZoneObject = AamapObject.extend({
+        initialize: function (options) {
+            ZoneObject.__super__.initialize.apply(this, arguments);
+
+            this.type = 'zone';
+        },
+
+        getColor: function () {
+            if (zoneColors[this.get('effect')]) {
+                return zoneColors[this.get('effect')];
+            }
+            return '#fff';
         }
     });
 
-    return Cursor;
+    return ZoneObject;
 });

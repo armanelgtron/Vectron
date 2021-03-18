@@ -3,6 +3,7 @@
 Vectron - map editor for Armagetron Advanced.
 Copyright (C) 2014  Tristan Whitcher    (tristan.whitcher@gmail.com)
 David Dubois        (ddubois@jotunstudios.com)
+Carlo Veneziano     (carlorfeo@gmail.com)
 ********************************************************************************
 
 This file is part of Vectron.
@@ -22,40 +23,16 @@ along with Vectron.  If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-define([], function() {
+define(['aamapTools/BaseTool'], function(BaseTool) {
+    'use strict';
 
-    function Settings(vectron) {
+    var WallTool = BaseTool.extend({
+        initialize: function (options) {
+            WallTool.__super__.initialize.apply(this, arguments);
 
-        this.vectron = vectron;
-
-        this.settings = {
-            //settings here
-            //settings here
-            
-        };
-    }  
-
-    Settings.prototype = {
-
-        constructor: Settings,
-
-        /*
-         * Would you like to set a setting? Good!
-         */
-        set:function(setting) {
-
-        },
-
-        /*
-         * Would you like to get a setting? Good!
-         */
-        get:function(setting) {
-
+            this.set('name', 'wall');
         }
+    });
 
-
-    };
-
-    return Settings;
-
+    return WallTool;
 });

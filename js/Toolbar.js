@@ -24,33 +24,43 @@ along with Vectron.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 define([
-    'aamapObjects/AamapObject',
+    'toolbarButtons/BaseButton',
+    'toolbarButtons/ToolButton',
+    'toolbarButtons/CanvasButton',
     'Mediator'
-], function(AamapObject, Mediator) {
+], function(BaseButton, ToolButton, CanvasButton, Mediator) {
     'use strict';
 
-    var Aamap = Backbone.Collection.extend({
-        model: AamapObject,
+    var buttonTypes = {
+        tool: ToolButton,
+        canvas: CanvasButton
+    };
 
+    var Toolbar = Backbone.View.extend({
         initialize: function(options) {
-            
+            this.buttons = {};
+            this.$('.button')
+                .each(this.createButton.bind(this))
+                .tooltip({placement: 'right'});
         },
 
-        // override Collection.add
-        add: function (object) {
-            Aamap.__super__.add.apply(this, arguments);
+        createButton: function(index, el) {
+            var $el = $(el),
+                type = $el.data('type'),
+                buttonParams = {el: $el},
+                button = null;
 
-            Mediator.publish('aamap:addedObject', object);
-            return this;
-        },
+            try {
+                // create specific button type if possible
+                button = new (buttonTypes[type])(buttonParams);
+            } catch (err) {
+                // otherwise create basic button
+                button = new BaseButton(buttonParams);
+            }
 
-        remove: function(object) {
-            Aamap.__super__.remove.apply(this, arguments);
-
-            Mediator.publish('aamap:removedObject', object);
-            return this;
+            return this.buttons[button.name] = button;
         }
     });
 
-    return Aamap;
+    return Toolbar;
 });

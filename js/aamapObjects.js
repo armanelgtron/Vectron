@@ -3,6 +3,7 @@
 Vectron - map editor for Armagetron Advanced.
 Copyright (C) 2014  Tristan Whitcher    (tristan.whitcher@gmail.com)
 David Dubois        (ddubois@jotunstudios.com)
+Carlo Veneziano     (carlorfeo@gmail.com)
 ********************************************************************************
 
 This file is part of Vectron.
@@ -22,45 +23,20 @@ along with Vectron.  If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-requirejs.config({
-    baseUrl: 'js',
-    paths: {
-        jquery: 'libs/jquery',
-        bootstrap: 'libs/bootstrap.min',
-        underscore: 'libs/underscore-min',
-        backbone: 'libs/backbone-min',
-        raphael: 'libs/raphael-min',
-        mousetrap: 'libs/mousetrap.min',
-        marknote: 'libs/marknote',
-        vectron: 'Vectron'
-    },
+define([
+    'aamapObjects/ZoneObject'
+], function(ZoneObject) {
+    'use strict';
 
-    // external libs missing define()
-    shim: {
-        jquery: {
-            exports: 'jQuery'
-        },
-        underscore: {
-          exports: '_'
-        },
-        backbone: {
-          deps: ['underscore'],
-          exports: 'Backbone'
-        },
-        bootstrap: ['jquery'],
-        raphael: {
-            exports: 'Raphael'
+    return {
+        createZone: function(x, y, radius, effect) {
+            return new ZoneObject({
+                x: x,
+                y: y,
+                radius: radius,
+                effect: effect
+            });
         }
-    }
-});
-
-requirejs(['jquery', 'vectron', 'bootstrap'], function($, Vectron) {
-
-    // bad practice, just use for debugging in console
-    //window.vectron = new Vectron();
-
-    new Vectron();
-
-    $('[rel=tooltip]').tooltip();
+    };
 
 });

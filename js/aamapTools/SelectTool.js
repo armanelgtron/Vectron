@@ -23,16 +23,17 @@ along with Vectron.  If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-define(['Mediator'], function(Mediator) {
+define(['aamapTools/BaseTool'], function(BaseTool) {
     'use strict';
 
-	// Not used yet
+    var SelectTool = BaseTool.extend({
+        initialize: function (options) {
+            SelectTool.__super__.initialize.apply(this, arguments);
 
-    var Cursor = Backbone.Model.extend({
-        initialize: function () {
-            
+            this.set('name', 'select');
+            this.set('allowSnap', false);
         }
     });
 
-    return Cursor;
+    return SelectTool;
 });

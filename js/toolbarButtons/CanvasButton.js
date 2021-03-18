@@ -23,16 +23,19 @@ along with Vectron.  If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-define(['Mediator'], function(Mediator) {
+define([
+    'toolbarButtons/BaseButton',
+    'Mediator'
+], function(BaseButton, Mediator) {
     'use strict';
 
-	// Not used yet
+    var CanvasButton = BaseButton.extend({
 
-    var Cursor = Backbone.Model.extend({
-        initialize: function () {
-            
+        onClick: function () {
+            // ex: canvas:zoom-in / canvas:zoom-out
+            Mediator.publish('canvas:' + this.name);
         }
     });
 
-    return Cursor;
+    return CanvasButton;
 });
