@@ -124,6 +124,30 @@ function eventHandler_init() {
         $("#zones-menu").hide();
     });
 
+    // Handle settings changes
+    $("#dark-theme").change(function(box)
+    {
+        if($("#dark-theme").is(':checked'))
+            enable_dark_theme();
+        else
+            disable_dark_theme();
+    });
+    
+    $("#show-info-bar").change(function(box)
+    {
+        if($("#show-info-bar").is(':checked'))
+            show_info_bar();
+        else
+            hide_info_bar();
+    });
+    
+    $("#show-debug-panel").change(function(box)
+    {
+        if($("#show-debug-panel").is(':checked'))
+            show_debug();
+        else
+            hide_debug();
+    });
 
     /*
      * WALL TOOL
@@ -219,17 +243,21 @@ function eventHandler_init() {
     });
 
     $(".toolbar-toolZoomIn").mouseup(function(e) {
-        if(vectron_zoom < 60) {
+        //if(vectron_zoom < 60) {
+        if(vectron_zoom == 1)
             vectron_zoom += 1;
-        }
+        else
+            vectron_zoom *= 1.25;
+        vectron_zoom = Math.round(vectron_zoom);
         vectron_render();
         $("#zones-menu").hide();
     });
 
     $(".toolbar-toolZoomOut").mouseup(function(e) {
-        if(vectron_zoom > 5) {
-            vectron_zoom -= 1;
+        if(vectron_zoom > 1) {
+            vectron_zoom /= 1.25;
         }
+        vectron_zoom = Math.round(vectron_zoom);
         vectron_render();
         $("#zones-menu").hide();
     });
@@ -374,6 +402,23 @@ function eventHandler_init() {
             moveTool_progress();
         }
 
+    });
+    
+    document.getElementById("canvas_container").onwheel=(function(event)
+    {
+        if(config_scrollWheelZoom)
+        {
+            if(event.deltaY > 0)
+            {
+                if(vectron_zoom > 1) vectron_zoom -= 1;
+            }
+            else
+            {
+                vectron_zoom += 1;
+            }
+            
+            vectron_render();
+        }
     });
 
     $(function() {

@@ -79,7 +79,11 @@ function cursor_render(newX, newY, spacing) {
          'L', cursor_realX, cursor_realY + 7
          ]
     );
+    if(config_isDark)
+        cursor_obj.attr({stroke:"#fff"});
 
+    document.getElementById("cursor-x").innerText = cursor_realX;
+    document.getElementById("cursor-y").innerText = cursor_realY;
 }
 
 function cursor_show() {

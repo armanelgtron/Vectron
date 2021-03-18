@@ -6,6 +6,7 @@
         <!-- Bootstrap -->
         <link href="./css/bootstrap.min.css" rel="stylesheet">
         <link href="./css/vectron.css" rel="stylesheet">
+        <link id="theme" rel="stylesheet">
         <link href="./css/shepherd-theme-arrows.css" rel="stylesheet">
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400,300,700,600' rel='stylesheet' type='text/css'>
         <script type="text/javascript" src="./js/libs/jquery.js"></script>
@@ -28,6 +29,7 @@
         <script type="text/javascript" src="./js/eventHandler.js"></script>
         <script type="text/javascript" src="./js/gui.js"></script>
         <script type="text/javascript" src="./js/settings.js"></script>
+        <script type="text/javascript" src="./js/config.js"></script>
         <script type="text/javascript" src="./js/vectron.js"></script>
 
         <script type="text/javascript" src="./js/libs/tether.js"></script>
@@ -39,6 +41,18 @@
 
     </head>
     <body class="noscroll">
+        <div class="info" style="display:none">
+            <b>cursor</b><br />
+            <span class="var">x: <span id="cursor-x">0</span></span>
+            <span class="var">y: <span id="cursor-y">0</span></span>
+            <br />
+            <span class="var">zoom: <span id="zoom">0</span></span>
+            <br />
+            <b>map anchor</b><br />
+            <span class="var">x: <span id="anchor-x">0</span></span>
+            <span class="var">y: <span id="anchor-y">0</span></span>
+        </div>
+
         <div id="control_box">
             <h1>Vectron <small>Map editor</small></h1>
             <div id="gui-content">
@@ -52,6 +66,7 @@
                             <li><a href="#gui-zt" tabindex="-1" data-toggle="tab">Zone Tool</a></li>
                         </ul>
                     </li>
+                    <li><a href="#gui-config" data-toggle="tab">Configure</a></li>
                     <li><a href="#" id="start-tour">Show Guide</a></li>
                 </ul>
                 <div id="gui-tab-content" class="tab-content" style="max-height:300px;overflow:scroll">
@@ -61,31 +76,38 @@
                         <input type="file" id="files" name="file" />
                         <div id="progress_bar"><div class="percent">0%</div></div>
                         <form role="form">
-                          <div class="form-group">
-                            <label for="map_name">Map Name</label>
+                          <div class="form-group" title="What should this map be called?">
+                            <label for="map_name">Map Name</label> (What should this map be called)
                             <input type="text" class="form-control" id="map_name">
                           </div>
-                          <div class="form-group">
-                            <label for="map_author">Author</label>
+                          <div class="form-group" title="Who created this map?">
+                            <label for="map_author">Author</label> (Who created this map)
                             <input type="text" class="form-control" id="map_author">
                           </div>
-                          <div class="form-group">
-                            <label for="map_category">Category</label>
+                          <div class="form-group" title="Where is this map for? (examples: racing, sumo)">
+                            <label for="map_category">Category</label> (What the map is for; examples: racing, sumo)
                             <input type="text" class="form-control" id="map_category" default="maps">
                           </div>
-                          <div class="form-group">
-                            <label for="map_version">Version</label>
+                          <div class="form-group" title="The current revision of the map. Clients and servers will automatically download and cache maps and they do NOT re-download the same file even after you update it. It doesn't matter what it's set to, but it should therefore be changed every time you update the map.">
+                            <label for="map_version">Revision</label> (The version of this map - hover for an explanation of why.)
                             <input type="text" class="form-control" id="map_version">
                           </div>
-                          <div class="form-group">
+                          <br />
+                          <div class="form-group" title="The file this map is verified against.">
                             <label for="map_dtd">DTD</label>
-                            <input type="text" class="form-control" id="map_dtd" default="sty.dtd">
+                            <input type="text" class="form-control" id="map_dtd" default="sty.dtd" list="dtds">
+                            <datalist id="dtds">
+                              <option value="sty.dtd"/>
+                              <option value="Loverboy/map-0.2.9_styctap_v1.5.dtd"/>
+                              <option value="map-0.3.1-a.dtd"/>
+                            </datalist>
                           </div>
                         </form>
                     </div>
 
                     <div class="tab-pane fade" id="gui-settings">
-
+                      <b>Not yet implemented!</b> <br />
+                      <textarea></textarea>
                     </div>
 
                     <div class="tab-pane fade" id="gui-wt">
@@ -122,6 +144,22 @@
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+
+
+                    <div class="tab-pane fade" id="gui-config">
+                      <input type="checkbox" id="dark-theme" name="dark-theme">
+                      <label for="dark-theme"> Enable dark theme <i>(beta)</i></label>
+                      <br />
+                      
+                      <input type="checkbox" id="show-info-bar" name="show-info-bar">
+                      <label for="show-info-bar"> Show info bar</label>
+                      <br />
+                      
+                      <input type="checkbox" id="show-debug-panel" name="show-debug-panel">
+                      <label for="show-debug-panel"> Show debug log information</label>
+                      <br />
+                      
                     </div>
 
 

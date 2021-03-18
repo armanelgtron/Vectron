@@ -186,6 +186,7 @@ function aamap_drawGrid() {
     }
     
     aamap_grid = vectron_screen.path(gridArray).attr("stroke", "#d6d6ec");
+    if(config_isDark) aamap_grid.attr('stroke', '#222');
 }
 
 var entityMap = {

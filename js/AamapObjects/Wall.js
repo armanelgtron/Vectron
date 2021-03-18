@@ -65,6 +65,7 @@ function Wall() {
             }
         } 
         this.obj = vectron_screen.path(this.pathArray).attr({stroke: "#333"});
+        if(config_isDark) this.obj.attr({stroke: "#fff"});
 
         if(this.isSelected) {
             selectTool_addHoverSetSelected(this);

@@ -55,6 +55,8 @@ function vectron_init() {
     aamap_init();
 
     eventHandler_init();
+    
+    config_load();
 
     vectron_render();
 
@@ -69,6 +71,11 @@ function vectron_init() {
  * Renders Vectron
  */
 function vectron_render() {
+    if(config_snapToPosition)
+    {
+        vectron_panX = Math.round(vectron_panX*4)/4;
+        vectron_panY = Math.round(vectron_panY*4)/4;
+    }
 
     vectron_screen.clear();
     vectron_width = $("#canvas_container").width();
@@ -76,6 +83,11 @@ function vectron_render() {
     vectron_screen.setSize(vectron_width, vectron_height);
     vectron_screen.setViewBox(0, 0, vectron_width, vectron_height);
     aamap_render();
+
+    document.getElementById("zoom").innerText = vectron_zoom;
+    
+    document.getElementById("anchor-x").innerText = vectron_panX;
+    document.getElementById("anchor-y").innerText = vectron_panY;
 
 }
 
