@@ -62,7 +62,7 @@ function xml_process(xml) {
 
     xml_axes = 4;
     $(xml).find("Axes").each(function() {
-        xml_axes = parseInt($(this).attr("xml_axes"))||4;
+        xml_axes = parseInt($(this).attr("number"));
     });
 
     gui_fillInput();
