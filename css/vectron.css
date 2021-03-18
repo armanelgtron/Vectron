@@ -1,4 +1,4 @@
-#canvas_container {   
+#canvas_container {
   cursor:default;
   position: absolute;
   right: 0;
@@ -7,10 +7,14 @@
   bottom: 0;
 }
 
+#canvas_container.blur {
+    -webkit-filter: blur(2px);
+}
+
 html, body { margin:0; }
 
 body.noscroll {
-  position: fixed; 
+  position: fixed;
   width: 100%;
   height:100%;
 }
@@ -39,8 +43,8 @@ body.noscroll {
   position:absolute;
   bottom:0;
   right:0;
-  width:340px; 
-  height:140px; 
+  width:340px;
+  height:140px;
   border-top-left-radius:6px;
   border-top:1px solid #1b1b1b;
   border-left:1px solid #1b1b1b;
@@ -80,7 +84,7 @@ body.noscroll {
   margin-bottom:5px;
 }
 
-#tool_bar { 
+#tool_bar {
   position:absolute;
   left:0;
   bottom:0;
@@ -103,7 +107,7 @@ body.noscroll {
   background:#393939;
 }
 
-#tool_bar a { 
+#tool_bar a {
   display:block;
   width:30px;
   height:30px;
@@ -123,13 +127,18 @@ body.noscroll {
   background-color:#1b1b1b;
 }
 
+#tool_bar ul li a.highlight {
+    border:2px solid white;
+    border-right: 0;
+}
+
 
 #tool_bar ul li a {
   background-size:cover;
   background-repeat:no-repeat;
 }
 
-#tool_bar #zones-menu { 
+#tool_bar #zones-menu {
   background:#333;
   margin:0;
   position: absolute;
@@ -145,83 +154,99 @@ body.noscroll {
   background-repeat:no-repeat;
 }
 
-#toolbar-gui-open {
+#contextMenu .toolbar-gui-open,
+#contextMenu .toolbar-gui-close,
+#contextMenu .toolbar-toolSelect,
+#contextMenu .toolbar-toolWall,
+#contextMenu .toolbar-toolZone {
+  cursor:pointer;
+}
+
+.toolbar-gui-open {
   background-image:url('../images/GUI/GuiOpen.png');
 }
 
-#toolbar-gui-close {
+.toolbar-gui-close {
   background-image:url('../images/GUI/GuiClose.png');
 }
 
-#toolbar-toolSelect {
+.toolbar-toolSelect {
   background-image:url('../images/SelectTool.png');
 }
 
-#toolbar-toolWall {
+.toolbar-toolWall {
   background-image:url('../images/ObjectTools/WallTool.png');
 }
 
-#toolbar-toolZone {
+.toolbar-toolZone {
   background-image:url('../images/ObjectTools/ZoneBase.png');
 }
 
 
-#zone-base { 
+#zone-base {
   position:relative;
 }
 
-#toolbar-toolZone-death {
+.toolbar-toolZone-death {
   background-image:url('../images/ObjectTools/Zones/DeathZone.png');
 }
-#toolbar-toolZone-win {
+.toolbar-toolZone-win {
   background-image:url('../images/ObjectTools/Zones/WinZone.png');
 }
-#toolbar-toolZone-target {
+.toolbar-toolZone-target {
   background-image:url('../images/ObjectTools/Zones/TargetZone.png');
 }
-#toolbar-toolZone-fortress {
+.toolbar-toolZone-fortress {
   background-image:url('../images/ObjectTools/Zones/FortressZone.png');
 }
-#toolbar-toolZone-rubber {
+.toolbar-toolZone-rubber {
   background-image:url('../images/ObjectTools/Zones/RubberZone.png');
 }
 
-#toolbar-toolSpawn {
+.toolbar-toolSpawn {
   background-image:url('../images/ObjectTools/SpawnTool.png');
 }
 
-#toolbar-toolLock {
+.toolbar-toolLock {
   background-image:url('../images/Lock/Lock.png');
 }
 
-#toolbar-toolUnlock {
+.toolbar-toolUnlock {
   background-image:url('../images/Lock/Unlock.png');
 }
 
-#toolbar-toolZoomIn {
+.toolbar-toolZoomIn {
   background-image:url('../images/Zoom/ZoomIn.png');
 }
-#toolbar-toolZoomOut {
+.toolbar-toolZoomOut {
   background-image:url('../images/Zoom/ZoomOut.png');
 }
 
-#toolbar-toolScaleUp {
+.toolbar-toolScaleUp {
   background-image:url('../images/Zoom/Grow.png');
 }
-#toolbar-toolScaleDown {
+.toolbar-toolScaleDown {
   background-image:url('../images/Zoom/Shrink.png');
 }
 
-#tool_bar li a#toolbar-toolScaleUp {
+.toolbar-disconnect {
+    font-family: sans-serif;
+}
+
+.shepherd-cancel-link {
+    font-family: sans-serif;
+}
+
+#tool_bar li a.toolbar-toolScaleUp {
   font-size:20px;
 }
 
-#tool_bar li a#toolbar-toolScaleDown {
+#tool_bar li a.toolbar-toolScaleDown {
   font-size:20px;
 }
 
-#tool_bar ul li#toolbar-toolLock-list {   display:block; }
-#tool_bar ul li#toolbar-toolUnlock-list {   display:none; }
+#tool_bar ul li.toolbar-toolLock-list {   display:block; }
+#tool_bar ul li.toolbar-toolUnlock-list {   display:none; }
 
 
 #control_box {
@@ -252,14 +277,14 @@ body.noscroll {
 
 #control_box h1 { text-align:left; }
 
-#control_box .tab-pane { 
+#control_box .tab-pane {
   background:#f5f5f5;
   border:1px solid #e5e5e5;
   border-top:0;
   padding:20px;
 }
 
-#control_box_close { 
+#control_box_close {
   float:right;
   width:30px;
   height:30px;
@@ -276,9 +301,14 @@ body.noscroll {
 #control_box table tr td:first-child { text-align:left; }
 #control_box table tr { text-align:left; }
 
-#debug_stream span { 
+#debug_stream span {
   color:#f5f5f5;
   font-size:11px;
   text-align:left;
   display:block;
+}
+
+#contextMenu {
+  position: absolute;
+  display:none;
 }

@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE Resource SYSTEM 'sty.dtd'>
+<Resource type='aamap' name='Rubix' version='0.1' author='Tronner' category='Season_2a'>
+<Map version='0.2.8'>
+<Settings>
+</Settings>
+<World>
+<Field logicalBox='true'>
+<Axes number='8'></Axes>
+<Spawn x='33' y='-10' angle='90'/>
+<Wall height='4'>
+<Point x="17" y="-11" />
+<Point x="17" y="-6" />
+<Point x="22" y="-6" />
+<Point x="22" y="-7.5" />
+<Point x="23" y="-7.5" />
+<Point x="23" y="-6" />
+<Point x="28" y="-6" />
+<Point x="28" y="-7.5" />
+<Point x="29" y="-7.5" />
+<Point x="29" y="-6" />
+<Point x="34" y="-6" />
+<Point x="34" y="-11" />
+</Wall>
+<Wall height='4'>
+<Point x="34" y="-11" />
+<Point x="32.5" y="-11" />
+<Point x="32.5" y="-12" />
+<Point x="34" y="-12" />
+<Point x="34" y="-17" />
+<Point x="32.5" y="-17" />
+<Point x="32.5" y="-18" />
+<Point x="34" y="-18" />
+</Wall>
+<Wall height='4'>
+<Point x="34" y="-18" />
+<Point x="34" y="-23" />
+<Point x="29" y="-23" />
+<Point x="29" y="-21.5" />
+<Point x="28" y="-21.5" />
+<Point x="28" y="-23" />
+<Point x="23" y="-23" />
+<Point x="23" y="-21.5" />
+<Point x="22" y="-21.5" />
+<Point x="22" y="-23" />
+<Point x="17" y="-23" />
+<Point x="17" y="-18" />
+<Point x="18.5" y="-18" />
+<Point x="18.5" y="-17" />
+<Point x="17" y="-17" />
+<Point x="17" y="-12" />
+<Point x="18.5" y="-12" />
+<Point x="18.5" y="-11" />
+<Point x="17" y="-11" />
+</Wall>
+<Wall height='4'>
+<Point x="23" y="-19.5" />
+<Point x="22" y="-19.5" />
+<Point x="22" y="-18" />
+<Point x="20.5" y="-18" />
+<Point x="20.5" y="-17" />
+<Point x="22" y="-17" />
+<Point x="22" y="-12" />
+<Point x="20.5" y="-12" />
+<Point x="20.5" y="-11" />
+<Point x="22" y="-11" />
+<Point x="22" y="-9.5" />
+<Point x="23" y="-9.5" />
+<Point x="23" y="-11" />
+<Point x="28" y="-11" />
+<Point x="28" y="-9.5" />
+<Point x="29" y="-9.5" />
+<Point x="29" y="-11" />
+<Point x="30.5" y="-11" />
+<Point x="30.5" y="-12" />
+<Point x="29" y="-12" />
+<Point x="29" y="-17" />
+<Point x="30.5" y="-17" />
+<Point x="30.5" y="-18" />
+<Point x="29" y="-18" />
+<Point x="29" y="-19.5" />
+<Point x="28" y="-19.5" />
+<Point x="28" y="-18" />
+</Wall>
+<Wall height='4'>
+<Point x="28" y="-18" />
+<Point x="26.5" y="-18" />
+<Point x="26.5" y="-17" />
+<Point x="28" y="-17" />
+<Point x="28" y="-12" />
+<Point x="23" y="-12" />
+<Point x="23" y="-17" />
+<Point x="24.5" y="-17" />
+<Point x="24.5" y="-18" />
+<Point x="23" y="-18" />
+<Point x="23" y="-19.5" />
+</Wall>
+<Wall height='4'>
+<Point x="26.5" y="-17" />
+<Point x="25.5" y="-17" />
+<Point x="25" y="-16.5" />
+<Point x="25.5" y="-16" />
+<Point x="26.5" y="-16" />
+<Point x="27" y="-15.5" />
+<Point x="27" y="-14" />
+<Point x="26" y="-14" />
+<Point x="26" y="-13" />
+<Point x="24" y="-13" />
+<Point x="25" y="-14" />
+<Point x="26" y="-14" />
+</Wall>
+<Wall height='4'>
+<Point x="30.5" y="-12" />
+<Point x="32.5" y="-12" />
+</Wall>
+<Wall height='4'>
+<Point x="30.5" y="-11" />
+<Point x="32.5" y="-11" />
+</Wall>
+<Wall height='4'>
+<Point x="32" y="-11" />
+<Point x="32" y="-8" />
+<Point x="31" y="-7" />
+<Point x="30" y="-7" />
+<Point x="31" y="-8" />
+<Point x="32" y="-8" />
+</Wall>
+<Wall height='4'>
+<Point x="29" y="-7.5" />
+<Point x="29.5" y="-8" />
+<Point x="30" y="-8.5" />
+<Point x="31" y="-8.5" />
+<Point x="31" y="-9.5" />
+<Point x="30" y="-8.5" />
+</Wall>
+<Wall height='4'>
+<Point x="29" y="-9.5" />
+<Point x="30.5" y="-11" />
+</Wall>
+<Wall height='4'>
+<Point x="28" y="-7.5" />
+<Point x="26.5" y="-6" />
+</Wall>
+<Wall height='4'>
+<Point x="23" y="-7.5" />
+</Wall>
+<Wall height='4'>
+<Point x="28" y="-9.5" />
+<Point x="26.5" y="-8" />
+<Point x="25" y="-8" />
+<Point x="24" y="-7" />
+</Wall>
+<Wall height='4'>
+<Point x="23" y="-7.5" />
+<Point x="24" y="-8.5" />
+<Point x="24.5" y="-9" />
+<Point x="25.5" y="-9" />
+<Point x="26.5" y="-10" />
+</Wall>
+<Wall height='4'>
+<Point x="25.5" y="-11" />
+<Point x="24.5" y="-10" />
+<Point x="23.5" y="-10" />
+<Point x="23" y="-9.5" />
+</Wall>
+<Wall height='4'>
+<Point x="21.5" y="-9.5" />
+<Point x="20.5" y="-10.5" />
+<Point x="20.5" y="-9.5" />
+<Point x="21.5" y="-9.5" />
+</Wall>
+<Wall height='4'>
+<Point x="20.5" y="-9.5" />
+<Point x="17" y="-6" />
+</Wall>
+<Wall height='4'>
+<Point x="22.5" y="-9.5" />
+<Point x="22.5" y="-8.5" />
+<Point x="21.5" y="-7.5" />
+<Point x="21.5" y="-6.5" />
+<Point x="18.5" y="-6.5" />
+<Point x="19.5" y="-7.5" />
+<Point x="20.5" y="-6.5" />
+</Wall>
+<Wall height='4'>
+<Point x="19.5" y="-8.5" />
+<Point x="20.5" y="-7.5" />
+<Point x="20.5" y="-8.5" />
+<Point x="21.5" y="-9.5" />
+</Wall>
+<Wall height='4'>
+<Point x="20.5" y="-11" />
+<Point x="19.5" y="-10" />
+<Point x="19.5" y="-9.5" />
+<Point x="17.5" y="-7.5" />
+<Point x="17.5" y="-8.5" />
+<Point x="18.5" y="-8.5" />
+</Wall>
+<Wall height='4'>
+<Point x="17" y="-9.5" />
+<Point x="18.5" y="-9.5" />
+<Point x="19" y="-10" />
+<Point x="19" y="-10.5" />
+<Point x="20" y="-11.5" />
+<Point x="19.5" y="-12" />
+<Point x="18.5" y="-12" />
+</Wall>
+<Wall height='4'>
+<Point x="20.5" y="-12" />
+<Point x="19.5" y="-13" />
+<Point x="18" y="-13" />
+</Wall>
+<Wall height='4'>
+<Point x="17" y="-13" />
+<Point x="18" y="-14" />
+<Point x="20" y="-14" />
+<Point x="21" y="-13" />
+<Point x="21" y="-14" />
+<Point x="20" y="-14" />
+</Wall>
+<Wall height='4'>
+<Point x="22" y="-14" />
+<Point x="21" y="-15" />
+<Point x="18" y="-15" />
+</Wall>
+<Wall height='4'>
+<Point x="17" y="-16" />
+<Point x="21" y="-16" />
+<Point x="20" y="-17" />
+<Point x="18" y="-17" />
+</Wall>
+<Wall height='4'>
+<Point x="20.5" y="-17" />
+<Point x="19.5" y="-18" />
+<Point x="20.5" y="-18" />
+</Wall>
+<Wall height='4'>
+<Point x="21" y="-18" />
+<Point x="22" y="-19" />
+<Point x="20" y="-21" />
+<Point x="19" y="-20" />
+<Point x="19.5" y="-19.5" />
+<Point x="19" y="-19" />
+<Point x="19" y="-20" />
+</Wall>
+<Wall height='4'>
+<Point x="18.5" y="-18" />
+<Point x="19" y="-18.5" />
+<Point x="20.5" y="-18.5" />
+<Point x="20.5" y="-19.5" />
+<Point x="20" y="-19.5" />
+<Point x="19.5" y="-19" />
+<Point x="19" y="-18.5" />
+</Wall>
+<Wall height='4'>
+<Point x="18.5" y="-18" />
+<Point x="17.5" y="-19" />
+<Point x="17.5" y="-20" />
+<Point x="19" y="-21.5" />
+<Point x="20.5" y="-23" />
+</Wall>
+<Wall height='4'>
+<Point x="22" y="-19.5" />
+<Point x="22" y="-21" />
+<Point x="20" y="-21" />
+</Wall>
+<Wall height='4'>
+<Point x="23" y="-21.5" />
+<Point x="23" y="-20" />
+<Point x="26" y="-23" />
+</Wall>
+<Wall height='4'>
+<Point x="23" y="-19.5" />
+<Point x="24.5" y="-19.5" />
+<Point x="24.5" y="-20.5" />
+<Point x="25.5" y="-20.5" />
+<Point x="25.5" y="-21.5" />
+<Point x="26.5" y="-21.5" />
+<Point x="26.5" y="-22.5" />
+<Point x="27.5" y="-21.5" />
+<Point x="26.5" y="-21.5" />
+</Wall>
+<Wall height='4'>
+<Point x="27.5" y="-21.5" />
+<Point x="28" y="-21" />
+<Point x="29" y="-21" />
+<Point x="29.5" y="-21.5" />
+<Point x="30" y="-22" />
+<Point x="33" y="-22" />
+<Point x="32" y="-21" />
+<Point x="31" y="-22" />
+</Wall>
+<Wall height='4'>
+<Point x="34" y="-22" />
+<Point x="32" y="-20" />
+<Point x="31" y="-21" />
+<Point x="30" y="-21" />
+<Point x="30" y="-20" />
+<Point x="32" y="-20" />
+</Wall>
+<Wall height='4'>
+<Point x="29" y="-21" />
+<Point x="29" y="-20.5" />
+<Point x="30" y="-19.5" />
+<Point x="32" y="-19.5" />
+<Point x="32.5" y="-19.5" />
+<Point x="33.5" y="-20.5" />
+<Point x="33.5" y="-19.5" />
+<Point x="32.5" y="-19.5" />
+</Wall>
+<Wall height='4'>
+<Point x="32" y="-19.5" />
+</Wall>
+<Wall height='4'>
+<Point x="32.5" y="-19.5" />
+<Point x="31.5" y="-18.5" />
+<Point x="31.5" y="-16.5" />
+<Point x="33" y="-15" />
+<Point x="33" y="-13" />
+<Point x="30" y="-13" />
+<Point x="31" y="-14" />
+<Point x="32" y="-13" />
+</Wall>
+<Wall height='4'>
+<Point x="29" y="-13" />
+<Point x="31" y="-15" />
+<Point x="32" y="-14" />
+<Point x="32" y="-15" />
+<Point x="31" y="-15" />
+</Wall>
+<Wall height='4'>
+<Point x="31.5" y="-16.5" />
+<Point x="30" y="-15" />
+<Point x="29.5" y="-14.5" />
+<Point x="29.5" y="-16" />
+<Point x="31" y="-16" />
+</Wall>
+<Wall height='4'>
+<Point x="31.5" y="-18.5" />
+<Point x="31" y="-18.5" />
+<Point x="30" y="-19.5" />
+</Wall>
+<Wall height='4'>
+<Point x="29" y="-19.5" />
+<Point x="28.5" y="-20" />
+<Point x="28.5" y="-20.5" />
+<Point x="26.5" y="-20.5" />
+<Point x="26.5" y="-19.5" />
+<Point x="25.5" y="-19.5" />
+<Point x="24.5" y="-18.5" />
+<Point x="23.5" y="-18.5" />
+</Wall>
+<Wall height='4'>
+<Point x="24.5" y="-18" />
+<Point x="25.5" y="-19" />
+<Point x="27" y="-19" />
+<Point x="27" y="-20" />
+<Point x="27.5" y="-19.5" />
+<Point x="27" y="-19" />
+</Wall>
+<Wall height='4'>
+<Point x="28" y="-19.5" />
+<Point x="28" y="-20.5" />
+</Wall>
+<Wall height='4'>
+<Point x="24.5" y="-17" />
+<Point x="23" y="-15.5" />
+</Wall>
+<Wall height='4'>
+<Point x="23" y="-15.5" />
+<Point x="23.5" y="-15" />
+<Point x="26" y="-15" />
+</Wall>
+<Wall height='4'>
+<Point x="24.5" y="-15" />
+<Point x="23" y="-13.5" />
+</Wall>
+<Wall height='4'>
+<Point x="21" y="-13" />
+</Wall>
+<Wall height='4'>
+<Point x="26.5" y="-20.5" />
+</Wall>
+<Wall height='4'>
+<Point x="27.5" y="-12.5" />
+</Wall>
+<Zone effect='death'>
+<ShapeCircle radius='.5' growth='0'  >
+<Point x='33' y='-6'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.2' growth='0'  >
+<Point x='32' y='-7'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.2' growth='0'  >
+<Point x='30.5' y='-7.5'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.3' growth='0'  >
+<Point x='27.5' y='-8.5'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.3' growth='0'  >
+<Point x='29.5' y='-8.5'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.5' growth='0'  >
+<Point x='26' y='-7'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.3' growth='0'  >
+<Point x='24' y='-8'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.2' growth='0'  >
+<Point x='24' y='-7'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.5' growth='0'  >
+<Point x='26.5' y='-10'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.3' growth='0'  >
+<Point x='24.5' y='-10'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.3' growth='0'  >
+<Point x='24' y='-8.5'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.3' growth='0'  >
+<Point x='21.5' y='-8.5'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.3' growth='0'  >
+<Point x='18' y='-13'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.5' growth='0'  >
+<Point x='21' y='-13'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.5' growth='0'  >
+<Point x='18' y='-15'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.5' growth='0'  >
+<Point x='21' y='-16'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.2' growth='0'  >
+<Point x='21' y='-19'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.2' growth='0'  >
+<Point x='19.5' y='-20'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.3' growth='0'  >
+<Point x='20' y='-20.5'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.2' growth='0'  >
+<Point x='18.5' y='-19.5'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.4' growth='0'  >
+<Point x='21' y='-22'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.3' growth='0'  >
+<Point x='21.5' y='-21'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.3' growth='0'  >
+<Point x='20.5' y='-21'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.25' growth='0'  >
+<Point x='22.5' y='-20.5'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.3' growth='0'  >
+<Point x='23.5' y='-20.5'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.3' growth='0'  >
+<Point x='24.5' y='-21.5'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.3' growth='0'  >
+<Point x='25.5' y='-22.5'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.3' growth='0'  >
+<Point x='24.5' y='-20.5'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.3' growth='0'  >
+<Point x='25.5' y='-21.5'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.2' growth='0'  >
+<Point x='30' y='-22.5'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.3' growth='0'  >
+<Point x='31.5' y='-22'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.3' growth='0'  >
+<Point x='33.5' y='-22.5'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.3' growth='0'  >
+<Point x='32' y='-21'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.3' growth='0'  >
+<Point x='30' y='-21'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.3' growth='0'  >
+<Point x='32.5' y='-18.5'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.5' growth='0'  >
+<Point x='31.5' y='-10.5'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.5' growth='0'  >
+<Point x='33' y='-16'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.5' growth='0'  >
+<Point x='33' y='-13'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.3' growth='0'  >
+<Point x='31.5' y='-15.5'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.3' growth='0'  >
+<Point x='30.5' y='-16.5'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.6' growth='0'  >
+<Point x='29.5' y='-18.5'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.3' growth='0'  >
+<Point x='26.5' y='-20.5'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.3' growth='0'  >
+<Point x='25' y='-20'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.4' growth='0'  >
+<Point x='25.5' y='-18'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.3' growth='0'  >
+<Point x='24.5' y='-16'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.5' growth='0'  >
+<Point x='26' y='-15'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.3' growth='0'  >
+<Point x='24.5' y='-12.5'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.1' growth='0'  >
+<Point x='24' y='-13.5'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='1' growth='0'  >
+<Point x='27.5' y='-12.5'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='target'>
+<ShapeCircle radius='.4' growth='0'  >
+<Point x='26' y='-16.5'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.1' growth='0'  >
+<Point x='27' y='-16'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.4' growth='0'  >
+<Point x='29.5' y='-12.5'/>
+</ShapeCircle>
+</Zone>
+<Zone effect='death'>
+<ShapeCircle radius='.4' growth='0'  >
+<Point x='21.5' y='-10.5'/>
+</ShapeCircle>
+</Zone>
+</Field>
+</World>
+</Map>
+</Resource>
+
+
+<!-- Created using Durf's Map Editor :] enjoy! -->

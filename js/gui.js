@@ -22,40 +22,38 @@ along with Vectron.  If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-define([], function() {
+var gui_active = false;
 
-    function Settings(vectron) {
+function gui_init() {
+    gui_writeLog("Welcome to Vectron.")
+}
 
-        this.vectron = vectron;
+function gui_writeLog(message) {
+    $('#debug_stream').append('<span>' + message + '</span');
+    var element = document.getElementById("debug_stream");
+    element.scrollTop = element.scrollHeight;
+}
 
-        this.settings = {
-            //settings here
-            //settings here
-            
-        };
-    }  
+function gui_clearLog() {
+    //$('#debug_stream').clear();
+}
 
-    Settings.prototype = {
+function gui_show() {
+    map_active = false;
+    gui_active = true;
+    $('#control_box').show();
+}
 
-        constructor: Settings,
+function gui_hide() {
+    $('#control_box').hide();
+    gui_active = false;
+    map_active = true;
+}
 
-        /*
-         * Would you like to set a setting? Good!
-         */
-        set:function(setting) {
-
-        },
-
-        /*
-         * Would you like to get a setting? Good!
-         */
-        get:function(setting) {
-
-        }
-
-
-    };
-
-    return Settings;
-
-});
+function gui_fillInput() {
+    $("#map_name").val(xml_name);
+    $("#map_author").val(xml_author)
+    $("#map_category").val(xml_category);
+    $("#map_version").val(xml_version)
+    $("#map_dtd").val("sty.dtd");
+}

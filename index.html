@@ -1,10 +1,42 @@
-<html>  
-    <head>  
+<html>
+    <head>
+        <meta charset="utf-8">
         <title>Vectron</title>
 
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400,300,700,600' rel='stylesheet' type='text/css'>
+        <!-- Bootstrap -->
         <link href="./css/bootstrap.min.css" rel="stylesheet">
         <link href="./css/vectron.css" rel="stylesheet">
+        <link href="./css/shepherd-theme-arrows.css" rel="stylesheet">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400,300,700,600' rel='stylesheet' type='text/css'>
+        <script type="text/javascript" src="./js/libs/jquery.js"></script>
+        <script type="text/javascript" src="./js/libs/raphael-min.js"></script>
+        <script type="text/javascript" src="./js/libs/raphael.set.hoverset.js"></script>
+        <script type="text/javascript" src="./js/libs/mousetrap.min.js"></script>
+        <script type="text/javascript" src="./js/libs/marknote.js"></script>
+
+        <script type="text/javascript" src="./js/AamapObjects/Spawn.js"></script>
+        <script type="text/javascript" src="./js/AamapObjects/Wall.js"></script>
+        <script type="text/javascript" src="./js/AamapObjects/Zone.js"></script>
+        <script type="text/javascript" src="./js/AamapTools/spawnTool.js"></script>
+        <script type="text/javascript" src="./js/AamapTools/wallTool.js"></script>
+        <script type="text/javascript" src="./js/AamapTools/zoneTool.js"></script>
+        <script type="text/javascript" src="./js/AamapTools/selectTool.js"></script>
+
+        <script type="text/javascript" src="./js/xml.js"></script>
+        <script type="text/javascript" src="./js/aamap.js"></script>
+        <script type="text/javascript" src="./js/cursor.js"></script>
+        <script type="text/javascript" src="./js/eventHandler.js"></script>
+        <script type="text/javascript" src="./js/gui.js"></script>
+        <script type="text/javascript" src="./js/settings.js"></script>
+        <script type="text/javascript" src="./js/vectron.js"></script>
+
+        <script type="text/javascript" src="./js/libs/tether.js"></script>
+        <script type="text/javascript" src="./js/libs/shepherd.js"></script>
+
+        <script type="text/javascript">
+            $('[data-toggle="tooltip"]').tooltip();
+        </script>
+
     </head>
     <body class="noscroll">
         <div id="control_box">
@@ -21,12 +53,34 @@
                         </ul>
                     </li>
                 </ul>
-                <div id="gui-tab-content" class="tab-content">
+                <div id="gui-tab-content" class="tab-content" style="max-height:300px;overflow:scroll">
 
                     <div class="tab-pane fade in active" id="gui-general">
-
+                        <h5>Load Map</h5>
                         <input type="file" id="files" name="file" />
                         <div id="progress_bar"><div class="percent">0%</div></div>
+                        <form role="form">
+                          <div class="form-group">
+                            <label for="map_name">Map Name</label>
+                            <input type="text" class="form-control" id="map_name">
+                          </div>
+                          <div class="form-group">
+                            <label for="map_author">Author</label>
+                            <input type="text" class="form-control" id="map_author">
+                          </div>
+                          <div class="form-group">
+                            <label for="map_category">Category</label>
+                            <input type="text" class="form-control" id="map_category" default="maps">
+                          </div>
+                          <div class="form-group">
+                            <label for="map_version">Version</label>
+                            <input type="text" class="form-control" id="map_version">
+                          </div>
+                          <div class="form-group">
+                            <label for="map_dtd">DTD</label>
+                            <input type="text" class="form-control" id="map_dtd" default="sty.dtd">
+                          </div>
+                        </form>
                     </div>
 
                     <div class="tab-pane fade" id="gui-settings">
@@ -73,7 +127,7 @@
                 </div>
             </div>
 
-            <button type="button" id="gui-save" data-loading-text="Saving..." class="btn btn-primary">Save</button>
+            <button type="button" id="gui-export" data-loading-text="Saving..." class="btn btn-primary">Export</button>
             <button id="gui-close" type="button" class="btn btn-primary">Close</button>
 
         </div>
@@ -82,21 +136,21 @@
             <div id="debug_stream">
             </div>
             <div id="branding_box">
-                <h4 id="branding">Vectron <small> 0.1</small></h4>
-                <small><small>With love &lt;3</small></small>
+                <h4 id="branding">Vectron <small> 0.2</small></h4>
+                <small><small>Tristan Whitcher</small></small>
             </div>
         </div>
         <div id="tool_bar">
             <ul>
                 <li>
-                    <a id="toolbar-gui-open" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Settings and Controls"></a>
-                    <a id="toolbar-gui-close" href="#" rel="tooltip" data-trigger="hover" data-placement="right" style="display:none;" data-original-title="Settings and Controls"></a>
+                    <a class="toolbar-gui-open" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Settings and Controls"></a>
+                    <a class="toolbar-gui-close" href="#" rel="tooltip" data-trigger="hover" data-placement="right" style="display:none;" data-original-title="Settings and Controls"></a>
                 </li>
             </ul>
 
             <ul>
                 <li>
-                    <a class="toolimg" id="toolbar-toolSelect" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Select Tool"></a>
+                    <a class="toolbar-toolSelect" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Select Tool"></a>
                 </li>
             </ul>
 
@@ -107,62 +161,93 @@
             </ul>-->
             <ul id="zone-base" class="single-item">
             	<li>
-                    <a class="toolimg" id="toolbar-toolWall" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Wall Tool"></a>
+                    <a class="toolbar-toolWall" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Wall Tool"></a>
                 </li>
                 <li>
-                    <a id="toolbar-toolZone" href="#"></a>
+                    <a class="toolbar-toolZone" href="#"></a>
                 </li>
                 <div id="zones-menu" style="display:none;">
                     <li>
-                        <a id="toolbar-toolZone-death" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Death"></a>
+                        <a class="toolbar-toolZone-death" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Death"></a>
                     </li>
                     <li>
-                        <a id="toolbar-toolZone-win" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Win"></a>
+                        <a class="toolbar-toolZone-win" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Win"></a>
                     </li>
                     <li>
-                        <a id="toolbar-toolZone-target" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Target"></a>
+                        <a class="toolbar-toolZone-target" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Target"></a>
                     </li>
                     <li>
-                        <a id="toolbar-toolZone-fortress" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Fortress"></a>
+                        <a class="toolbar-toolZone-fortress" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Fortress"></a>
                     </li>
                     <li>
-                        <a class="toolzoneimg" id="toolbar-toolZone-rubber" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Rubber"></a>
+                        <a class="toolzoneimg toolbar-toolZone-rubber" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Rubber"></a>
                     </li>
                 </div>
            <!-- </ul>
             <ul>-->
                 <li>
-                    <a id="toolbar-toolSpawn" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Spawn tool"></a>
+                    <a class="toolbar-toolSpawn" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Spawn tool"></a>
                 </li>
             </ul>
             <ul>
-                <li id="toolbar-toolLock-list">
-                    <a id="toolbar-toolLock" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Snap-locked"></a>
+                <li class="toolbar-toolLock-list">
+                    <a class="toolbar-toolLock" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Snap-locked"></a>
                 </li>
-                <li id="toolbar-toolUnlock-list">
-                    <a id="toolbar-toolUnlock" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Snap-unlocked"></a>
-                </li>
-                <li>
-                    <a id="toolbar-toolZoomIn" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Zoom In"></a>
+                <li class="toolbar-toolUnlock-list">
+                    <a class="toolbar-toolUnlock" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Snap-unlocked"></a>
                 </li>
                 <li>
-                    <a id="toolbar-toolZoomOut" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Zoom Out"></a>
+                    <a class="toolbar-toolZoomIn" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Zoom In"></a>
+                </li>
+                <li>
+                    <a class="toolbar-toolZoomOut" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Zoom Out"></a>
                 </li>
              </ul>
              <ul>
                 <li>
-                    <a id="toolbar-toolScaleUp" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Scale Up"></a>
+                    <a class="toolbar-toolScaleUp" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Scale Up"></a>
                 </li>
                 <li>
-                    <a id="toolbar-toolScaleDown" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Scale Down"></a>
-                </li>                
+                    <a class="toolbar-toolScaleDown" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Scale Down"></a>
+                </li>
+
             </ul>
             <ul>
+
                 <li>
-                    <a id="toolbar-disconnect" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Cancel or Delete Last Object.">&cross;</a>
+                    <a class="toolbar-disconnect" href="#" rel="tooltip" data-trigger="hover" data-placement="right" data-original-title="Delete Selected or Undo.">&cross;</a>
                 </li>
+
             </ul>
         </div>
-        <script type="text/javascript" data-main="js/main.js" src="js/libs/require.min.js"></script>
-    </body>  
+
+        <div id="contextMenu" class="dropdown clearfix">
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="display:block;position:static;margin-bottom:5px;">
+                <li><a tabindex="-1" href="#" class="">Toggle GUI</a></li>
+                <li class="divider"></li>
+                <li><a tabindex="-1" href="#" class="">Copy</a></li>
+                <li><a tabindex="-1" href="#" class="">Paste</a></li>
+                <li class="divider"></li>
+                <li><a tabindex="-1" href="#" class="toolbar-toolSelect">Select Tool</a></li>
+                <li><a tabindex="-1" href="#" class="toolbar-toolWall">Wall Tool</a></li>
+
+                <li><a tabindex="-1" href="#" class="toolbar-toolZone">Zone Tool</a></li>
+                <li><a tabindex="-1" href="#" class="toolbar-toolSpawn">Spawn Tool</a></li>
+                <li class="divider"></li>
+                <li><a tabindex="-1" href="#" class="toolbar-toolLock">Toggle Snap-to-grid</a></li>
+                <li><a tabindex="-1" href="#" class="toolbar-toolZoomIn">Zoom In</a></li>
+                <li><a tabindex="-1" href="#" class="toolbar-toolZoomOut">Zoom Out</a></li>
+                <li class="divider"></li>
+                <li><a tabindex="-1" href="#" class="toolbar-toolScaleUp">Scale Up</a></li>
+                <li><a tabindex="-1" href="#" class="toolbar-toolScaleDown">Scale Down</a></li>
+
+            </ul>
+        </div>
+
+        <script type="text/javascript" src="./js/libs/bootstrap.min.js"></script>
+        <script type="text/javascript" src="./js/tour.js"></script>
+        <script>
+        $('[rel=tooltip]').tooltip();
+        </script>
+    </body>
 </html>

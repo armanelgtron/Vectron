@@ -22,45 +22,27 @@ along with Vectron.  If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-requirejs.config({
-    baseUrl: 'js',
-    paths: {
-        jquery: 'libs/jquery',
-        bootstrap: 'libs/bootstrap.min',
-        underscore: 'libs/underscore-min',
-        backbone: 'libs/backbone-min',
-        raphael: 'libs/raphael-min',
-        mousetrap: 'libs/mousetrap.min',
-        marknote: 'libs/marknote',
-        vectron: 'Vectron'
-    },
+var spawnTool_currentObj = null;
 
-    // external libs missing define()
-    shim: {
-        jquery: {
-            exports: 'jQuery'
-        },
-        underscore: {
-          exports: '_'
-        },
-        backbone: {
-          deps: ['underscore'],
-          exports: 'Backbone'
-        },
-        bootstrap: ['jquery'],
-        raphael: {
-            exports: 'Raphael'
-        }
-    }
-});
 
-requirejs(['jquery', 'vectron', 'bootstrap'], function($, Vectron) {
+function spawnTool_connect() {
+    $(".toolbar-toolSpawn").css("background-color", "rgba(0,0,0,0.3)");
+}
 
-    // bad practice, just use for debugging in console
-    //window.vectron = new Vectron();
+function spawnTool_disconnect() {
+    $(".toolbar-toolSpawn").attr("style", "");
+    vectron_toolActive = false;
+}
 
-    new Vectron();
+function spawnTool_start() {
+    spawnTool_currentObj = new Spawn();
+    vectron_toolActive = true;
+}
 
-    $('[rel=tooltip]').tooltip();
-
-});
+function spawnTool_complete() {
+    spawnTool_currentObj.guideObj.remove();
+    aamap_add(spawnTool_currentObj);
+    spawnTool_currentObj.render();
+    spawnTool_currentObj = null;
+    vectron_toolActive = false;
+}

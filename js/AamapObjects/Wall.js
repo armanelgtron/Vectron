@@ -22,86 +22,109 @@ along with Vectron.  If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-define([], function() {
+function Wall() {
 
-    function Wall(vectron, id) {
+    this.objectID = vectron_objectID;
+    vectron_objectID++;
 
-        this.vectron = vectron;
+    this.obj = vectron_screen.path();
+    this.obj.data("id", this.objectID);
 
-        this.id = id;
+    this.guideObj = vectron_screen.path();
 
-        this.obj = vectron.screen.path();
-        this.guideObj = vectron.screen.path();
+    this.isSelected = false;
+    this.glowObj = null;
 
-        this.points = [];
+    this.points = [];
+    this.pathArray = [];
+
+    this.xml = 'Wall';
+
+    this.render = function() {
+        if(this.obj != null) this.obj.remove();
+        if(this.glowObj != null) this.glowObj.remove();
+        
         this.pathArray = [];
-        //this.guideArray = [];
-
-        this.xml = 'Wall';
-
-    }  
-
-    Wall.prototype = {
-
-        constructor: Wall,
-
-        render:function() {
-            this.obj.remove();
-            this.pathArray = [];
-            for(var i = 0; i < this.points.length; i++) {
-                if(i == 0) {
-                    this.pathArray = this.pathArray.concat(
-                        [
-                         'M',
-                         this.vectron.map.realX(this.points[0].x),
-                         this.vectron.map.realY(this.points[0].y)
-                        ]
-                    );
-                } else {
-                    this.pathArray = this.pathArray.concat(
-                        [
-                         'L',
-                         this.vectron.map.realX(this.points[i].x),
-                         this.vectron.map.realY(this.points[i].y)
-                        ]
-                    );
-                }
-            } 
-            this.obj = this.vectron.screen.path(this.pathArray).attr({stroke: "#333"});
-        },
-
-        guide:function() {
-            this.guideObj.remove();
-            var guideArray = []
-            guideArray = guideArray.concat(
-                [
-                 'M',
-                 this.vectron.map.realX(this.points[this.points.length-1].x),
-                 this.vectron.map.realY(this.points[this.points.length-1].y)
-                ]
-            );
-            guideArray = guideArray.concat(
-                [
-                 'L',
-                 this.vectron.cursor.realX,
-                 this.vectron.cursor.realY
-                ]
-            );
-            this.guideObj = this.vectron.screen.path(guideArray).attr({stroke: "#aaa"});
-        },
-
-        /*
-         *  Should this be based on map coordinates or game coordinates?
-         */ 
-        scale:function(factor) {
-
-            for(var i = 0, ii = this.points.length; i < ii; i++) {
-                this.points[i].x *= factor;
-                this.points[i].y *= factor;
+        for(var i = 0; i < this.points.length; i++) {
+            if(i == 0) {
+                this.pathArray = this.pathArray.concat(
+                    [
+                     'M',
+                     aamap_realX(this.points[0].x),
+                     aamap_realY(this.points[0].y)
+                    ]
+                );
+            } else {
+                this.pathArray = this.pathArray.concat(
+                    [
+                     'L',
+                     aamap_realX(this.points[i].x),
+                     aamap_realY(this.points[i].y)
+                    ]
+                );
             }
+        } 
+        this.obj = vectron_screen.path(this.pathArray).attr({stroke: "#333"});
+
+        if(this.isSelected) {
+            selectTool_addHoverSetSelected(this);
+        } else if(vectron_currentTool == "select") {
+            selectTool_addHoverSet(this);
         }
-    };
+    }
 
-    return Wall;
+    this.guide = function() {
+        this.guideObj.remove();
+        var guideArray = []
+        guideArray = guideArray.concat(
+            [
+             'M',
+             aamap_realX(this.points[this.points.length-1].x),
+             aamap_realY(this.points[this.points.length-1].y)
+            ]
+        );
+        guideArray = guideArray.concat(
+            [
+             'L',
+             cursor_realX,
+             cursor_realY
+            ]
+        );
+        this.guideObj = vectron_screen.path(guideArray).attr({stroke: "#aaa"});
+    }
 
-});
+    this.scale = function(factor) {
+        for(var i = 0, ii = this.points.length; i < ii; i++) {
+            this.points[i].x *= factor;
+            this.points[i].y *= factor;
+        }
+    }
+
+    this.move = function(dx, dy) {
+        for(var i = 0, ii = this.points.length; i < ii; i++) {
+            this.points[i].x += dx;
+            this.points[i].y += dy;
+            gui_writeLog(this.points[i].x);
+            gui_writeLog(this.points[i].y);
+        }
+    }
+
+    this.getXML = function() {
+        var xml = '<Wall height="4">';
+        for(var i = 0, ii = this.points.length; i < ii; i++) {
+            xml += '<Point x="' + this.points[i].x + '" y="'+ this.points[i].y + '"/>';
+        }
+        xml += '</Wall>';
+        return xml;
+    }
+
+    this.outputFriendlyXML = function() {
+        gui_writeLog(escapeHtml('<Wall height="4">'));
+        for(var i = 0, ii = this.points.length; i < ii; i++) {
+            gui_writeLog('&nbsp;&nbsp;' + escapeHtml('<Point x="' + this.points[i].x + '" y="'+ this.points[i].y + '"/>'));
+        }
+        gui_writeLog(escapeHtml('</Wall>'));
+    }
+
+}  
+

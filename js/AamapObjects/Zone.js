@@ -22,53 +22,62 @@ along with Vectron.  If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-define([], function() {
+function Zone(x, y, radius, type) {
 
-    function Zone(vectron, x, y, radius, type, id) {
+    this.objectID = vectron_objectID;
+    vectron_objectID++;
 
-        this.vectron = vectron;
+    this.obj = vectron_screen.circle(0, 0, 0);
+    this.obj.data("id", this.objectID);
 
-        this.id = id;
+    this.isSelected = false;
+    this.glowObj = null;
 
-        this.obj = this.vectron.screen.circle(0, 0, 0);
+    this.x = x;
+    this.y = y;
+    this.radius = radius;
 
-        this.x = x;
-        this.y = y;
-        this.radius = radius;
+    this.type = type;
 
-        this.type = type;
+    this.xml = 'Zone';
 
-        this.xml = 'Zone';
-        this.render();
+    this.render = function() {
+        if(this.obj != null) this.obj.remove();
+        if(this.glowObj != null) this.glowObj.remove();
+        
+        this.obj = vectron_screen.circle(aamap_realX(this.x),
+            aamap_realY(this.y),
+            this.radius*vectron_zoom).attr(
+                {"stroke": zoneTool_typeArray[this.type][1], "fill": zoneTool_typeArray[this.type][1], "fill-opacity": ".05"}
+        );
 
-        vectron.gui.writeLog("Zone at ("+x+", "+y+")");
 
-    }  
-
-    Zone.prototype = {
-
-        constructor: Zone,
-
-        render:function() {
-            this.obj = this.vectron.screen.circle(this.vectron.map.realX(this.x),
-                this.vectron.map.realY(this.y),
-                this.radius*this.vectron.map.zoom).attr(
-                    {"stroke": this.vectron.map.zoneTool.typeArray[this.type][1], "fill": this.vectron.map.zoneTool.typeArray[this.type][1], "fill-opacity": ".05"}
-                );
-        },
-
-        /*
-         *  Should this be based on the SCALE_FACTOR setting in the game or on map
-         *  Coordinates?
-         */ 
-        scale:function(factor) {
-            this.x *= factor;
-            this.y *= factor;
-            this.radius *= factor;
+        if(this.isSelected) {
+            selectTool_addHoverSetSelected(this);
+        } else if(vectron_currentTool == "select") {
+            selectTool_addHoverSet(this);
         }
+    }
 
-    };
+    this.scale = function(factor) {
+        this.x *= factor;
+        this.y *= factor;
+        this.radius *= factor;
+    }
 
-    return Zone;
+    this.move = function(dx, dy) {
+        this.x += dx;
+        this.y += dy;
+    }
 
-});
+    this.getXML = function() {
+        //<Zone effect=""><ShapeCircle radius="" growth=""><Point x="" y=""/></ShapeCircle></Zone>
+        return '<Zone effect="' + zoneTool_typeArray[this.type][0] +'"><ShapeCircle radius=" '+ this.radius +' " growth=""><Point x="' + this.x + '" y="' + this.y + '"/></ShapeCircle></Zone>';
+    }
+
+    this.outputFriendlyXML = function() {
+        gui_writeLog(escapeHtml('<Zone effect="' + zoneTool_typeArray[this.type][0] +'"><ShapeCircle radius=" '+ this.radius +' " growth=""><Point x="' + this.x + '" y="' + this.y + '"/></ShapeCircle></Zone>'));
+    }
+
+} 
+
