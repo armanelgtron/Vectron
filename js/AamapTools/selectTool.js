@@ -423,7 +423,7 @@ var selectTool_hoverOut = function(evt) {
     if(vectron_toolActive) return;
 
     shouldAddToSelected = false;
-    this[1].attr("stroke", "#FFFFFF").attr("cursor", "default");
+    this[1].attr("stroke", config_isDark?"#000000":"#FFFFFF").attr("cursor", "default");
     this[0].attr("cursor", "default");
     gui_writeLog("Null Now");
     selectTool_hoveredSet = null;
