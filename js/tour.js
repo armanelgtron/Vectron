@@ -245,10 +245,15 @@ tour.addStep('cancel-step', {
 
 tour.on('complete', function() {
     $('#canvas_container').removeClass('blur');
+
+    localStorage.setItem("tour",1);
 })
 
 tour.on('cancel', function() {
     $('#canvas_container').removeClass('blur');
+
+    localStorage.setItem("tour",2);
 })
 
-tour.start();
+if(window.localStorage && !localStorage.getItem("tour"))
+    tour.start();

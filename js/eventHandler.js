@@ -106,6 +106,17 @@ function eventHandler_init() {
         $("#zones-menu").hide();
     });
 
+    $("#start-tour").mouseup(function(e) {
+        tour.complete();
+        tour.start();
+        if(gui_active) {
+            gui_hide();
+            $(".toolbar-gui-close").hide();
+            $(".toolbar-gui-open").show();
+        }
+        gui_writeLog('GUI TOGGLE');
+        $("#zones-menu").hide();
+    });
 
     $(".toolbar-toolSelect").mouseup(function(e) {
         vectron_connectTool("select");
