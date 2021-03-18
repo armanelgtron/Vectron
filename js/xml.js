@@ -55,6 +55,9 @@ function xml_process(xml) {
     xml_version = resource.attr("version");
     xml_category = resource.attr("category");
 
+    try{xml_dtd = $.parseXML(xml).firstChild.systemId;}
+    catch(e){xml_dtd = "sty.dtd"; gui_writeLog("Could not determine dtd!");}
+
     xml_settings.splice(0);
     $(xml).find("Setting").each(function() {
         xml_settings.push($(this).attr("name")+" "+$(this).attr("value"));
