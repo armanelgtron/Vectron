@@ -31,7 +31,7 @@ function config_load()
 {
     // Initialize default values if necessary
     if(localStorage.getItem("darkTheme") == null)
-        localStorage.setItem("darkTheme","false");
+        localStorage.setItem("darkTheme","true");
     
     if(localStorage.getItem("showInfoBar") == null)
         localStorage.setItem("showInfoBar","false"); 
