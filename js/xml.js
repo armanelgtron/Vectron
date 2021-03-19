@@ -43,11 +43,6 @@ function xml_init() {
 
 function xml_process(xml) {
 
-    var x;
-    var y;
-    var ptsx = [];
-    var ptsy = [];
-
     var resource = $(xml).filter(":first");
     gui_writeLog(resource.attr("name"));
     xml_name = resource.attr("name");
@@ -70,6 +65,24 @@ function xml_process(xml) {
 
     gui_fillInput();
 
+    var pt = xml_process_piece(xml);
+    var ptsx = pt[0], ptsy = pt[1];
+
+    var max_x = Math.max.apply(Math, ptsx);
+    var min_x = Math.min.apply(Math, ptsx);
+    var max_y = Math.max.apply(Math, ptsy);
+    var min_y = Math.min.apply(Math, ptsy);
+
+    vectron_panX = -1*(max_x + min_x)/2;
+    vectron_panY = -1*(max_y + min_y)/2;
+    vectron_render();
+}
+
+function xml_process_piece(xml)
+{
+    var x,y;
+    var ptsx = [];
+    var ptsy = [];
 
     $(xml).find("Spawn").each(function() {
         var spawn = $(this);
@@ -119,14 +132,7 @@ function xml_process(xml) {
         aamap_add(wallObj);
     });
 
-    var max_x = Math.max.apply(Math, ptsx);
-    var min_x = Math.min.apply(Math, ptsx);
-    var max_y = Math.max.apply(Math, ptsy);
-    var min_y = Math.min.apply(Math, ptsy);
-
-    vectron_panX = -1*(max_x + min_x)/2;
-    vectron_panY = -1*(max_y + min_y)/2;
-    vectron_render();
+    return [ptsx, ptsy];
 }
 
 function xml_write() {

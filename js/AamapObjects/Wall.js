@@ -101,6 +101,16 @@ function Wall() {
         }
     }
 
+    this.getPosition = function()
+    {
+        var x=0,y=0;
+        for(var i=this.points.length-1;i>=0;--i) {
+            x += this.points[i].x;
+            y += this.points[i].y;
+        }
+        return [(x/this.points.length),(y/this.points.length)];
+    }
+
     this.move = function(dx, dy) {
         for(var i = 0, ii = this.points.length; i < ii; i++) {
             this.points[i].x += dx;

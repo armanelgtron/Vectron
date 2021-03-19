@@ -283,6 +283,89 @@ function selectTool_deselectAll() {
     selectTool_selectedObjs = [];
 }
 
+var selectTool_clipboard = "";
+function selectTool_copy()
+{
+    var len = selectTool_selectedObjs.length;
+    if(len == 0)
+    {
+        setTimeout(function(){alert("Nothing to copy!");},0);
+    }
+    else
+    {
+        selectTool_clipboard = "<Field>";
+        for(var i=0;i<len;++i)
+        {
+            selectTool_clipboard += selectTool_selectedObjs[i].getXML()+"\n";
+        }
+        selectTool_clipboard += "</Field>";
+    }
+}
+
+function selectTool_paste()
+{
+    if(selectTool_clipboard)
+    {
+        var objsBeforePaste = aamap_objects.length;
+
+        // Load copied objects
+        xml_process_piece(selectTool_clipboard);
+
+        if(aamap_objects.length == objsBeforePaste)
+        {
+            // Huh.
+            setTimeout(function(){alert("Pasting failed, no objects were pasted.");},0);
+            return;
+        }
+
+        /*
+        // If these are objects that already existed on this map
+        // determine that we need to move them to the cursor position
+        var moveToCursor = false;
+        for(var i=objsBeforePaste-1;i>=0;--i) // objects before paste
+        {
+            for(var z=objsBeforePaste;z<aamap_objects.length;++z) // objects pasted
+            {
+                if(aamap_objects[i].getXML() == aamap_objects[z].getXML())
+                {
+                    moveToCursor = true;
+                    break;
+                }
+            }
+        }
+
+        if(moveToCursor)
+        */
+        {
+            var objsPasted = aamap_objects.length-objsBeforePaste;
+            var x = 0, y = 0;
+            for(var z=objsBeforePaste;z<aamap_objects.length;++z) // objects pasted
+            {
+                var pos = aamap_objects[z].getPosition();
+                x += pos[0]; y += pos[1];
+            }
+            x /= objsPasted; y /= objsPasted;
+
+            for(var z=objsBeforePaste;z<aamap_objects.length;++z) // objects pasted
+            {
+                aamap_objects[z].move(aamap_mapX(cursor_realX)-x,aamap_mapY(cursor_realY)-y);
+            }
+        }
+
+        // select pasted elements
+        selectTool_deselectAll();
+        for(var i=objsBeforePaste;i<aamap_objects.length;++i) // objects pasted
+        {
+            selectTool_select(aamap_objects[i]);
+            selectTool_selectedObjs.push(aamap_objects[i]);
+        }
+    }
+    else
+    {
+        setTimeout(function(){alert("Nothing to paste!");},0);
+    }
+}
+
 function selectTool_orderCorners( xStart, yStart, xEnd, yEnd ) {
     var ordered = [];
     if( xStart < xEnd ) {

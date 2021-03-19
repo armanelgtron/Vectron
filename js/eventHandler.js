@@ -120,12 +120,6 @@ function eventHandler_init() {
         $("#zones-menu").hide();
     });
 
-    $(".toolbar-toolSelect").mouseup(function(e) {
-        vectron_connectTool("select");
-        gui_writeLog('Select Tool Connected.');
-        $("#zones-menu").hide();
-    });
-
     // Handle settings changes
     $("#dark-theme").change(function(box)
     {
@@ -149,6 +143,21 @@ function eventHandler_init() {
             show_debug();
         else
             hide_debug();
+    });
+
+
+    $(".toolbar-copy").mouseup(function(e) {
+        selectTool_copy();
+    });
+    
+    $(".toolbar-paste").mouseup(function(e) {
+        selectTool_paste();
+    });
+
+    $(".toolbar-toolSelect").mouseup(function(e) {
+        vectron_connectTool("select");
+        gui_writeLog('Select Tool Connected.');
+        $("#zones-menu").hide();
     });
 
     /*
@@ -299,6 +308,10 @@ function eventHandler_init() {
             vectron_render();
         }
         $("#zones-menu").hide();
+    });
+
+    $(".toolbar-redo").mouseup(function(e) {
+        aamap_redo();
     });
 
     $("#canvas_container").mouseleave(function(e) {

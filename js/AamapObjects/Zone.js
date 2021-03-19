@@ -67,6 +67,11 @@ function Zone(x, y, radius, growth, type) {
         this.growth *= factor;
     }
 
+    this.getPosition = function()
+    {
+        return [this.x,this.y];
+    }
+
     this.move = function(dx, dy) {
         this.x += dx;
         this.y += dy;
