@@ -436,7 +436,9 @@ function eventHandler_init() {
         $(document).keyup(function(evt) {
             if (evt.keyCode == 32 && eventHandler_space) {
                 eventHandler_space = false;
+                var tool = vectron_toolActive;
                 navigationTool_complete();
+                vectron_toolActive = tool;
             }
         }).keydown(function(evt) {
             if (evt.keyCode == 32 && !eventHandler_space) {
