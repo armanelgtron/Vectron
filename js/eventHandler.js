@@ -402,6 +402,9 @@ function eventHandler_init() {
 
         if(vectron_currentTool == "wall" && vectron_toolActive) {
             wallTool_currentObj.guide();
+            navigationTool_autopan(function(){
+                wallTool_currentObj.guide();
+            });
         } else if(vectron_currentTool == "zone") {
             zoneTool_guide();
         } else if(vectron_currentTool == "spawn") {
@@ -563,57 +566,25 @@ function eventHandler_init() {
         }
     }, 'keydown');
 
-    var __panX = 0, __panY = 0;
-    var __pan_timeout;
-    function __check_pan()
-    {
-        if(__panX == __panY && __panX == 0)
-        {
-            __panX = aamap_realX(vectron_panX);
-            __panY = aamap_realY(vectron_panY);
-        }
-    }
-    function __render_pan()
-    {
-        var xdir = (__panX - aamap_realX(vectron_panX))/2;
-        var ydir = (__panY - aamap_realY(vectron_panY))/2;
-        vectron_screen.setViewBox(xdir, ydir, vectron_width, vectron_height);
-
-        var bbox = aamap_grid.getBBox();
-        aamap_grid.translate(
-            (Math.round(xdir/vectron_zoom)*vectron_zoom)-(bbox.x-(aamap_grid.bbox.x)),
-            (Math.round(ydir/vectron_zoom)*vectron_zoom)-(bbox.y-(aamap_grid.bbox.y))
-        );
-
-        clearTimeout(__pan_timeout);
-        __pan_timeout = setTimeout(function()
-        {
-            __panX=__panY=0;
-            vectron_render()
-        },100);
-    }
-    function __adjust_pan(x,y)
-    {
-        __check_pan();
-        vectron_panX += x;
-        vectron_panY += y;
-        __render_pan();
-    }
     Mousetrap.bind('right', function(e) {
         if(!aamap_active) return;
-        __adjust_pan(-0.1,0);
+
+        navigationTool_manualPan(-0.1,0);
     });
     Mousetrap.bind('left', function(e) {
         if(!aamap_active) return;
-        __adjust_pan(0.1,0);
+
+        navigationTool_manualPan(0.1,0);
     });
     Mousetrap.bind('up', function(e) {
         if(!aamap_active) return;
-        __adjust_pan(0,-0.1);
+
+        navigationTool_manualPan(0,-0.1);
     });
     Mousetrap.bind('down', function(e) {
         if(!aamap_active) return;
-        __adjust_pan(0,0.1);
+
+        navigationTool_manualPan(0,0.1);
     });
     Mousetrap.bind('shift+space', function(e) {
         if(!aamap_active) return;
