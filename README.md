@@ -2,7 +2,7 @@
 
 A map editor for Armagetron Advanced.
 
-Originally created by Tristan Whitcher.
+Originally created by Carlo Veneziano and re-written by Tristan Whitcher.
 
 
 ### Features legend:
