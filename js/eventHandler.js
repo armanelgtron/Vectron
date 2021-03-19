@@ -23,18 +23,7 @@ along with Vectron.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 var eventHandler_space = false;
-
-var eventHandler_spaceX = 0;
-var eventHandler_spaceY = 0;
-
-var eventHandler_startPanX = null;
-var eventHandler_startPanY = null;
-
-var eventHandler_startPanRealX = null;
-var eventHandler_startPanRealY = null;
-
 var eventHandler_shift = false;
-
 var eventHandler_contextMenu = false;
 
 
@@ -157,6 +146,12 @@ function eventHandler_init() {
     $(".toolbar-toolSelect").mouseup(function(e) {
         vectron_connectTool("select");
         gui_writeLog('Select Tool Connected.');
+        $("#zones-menu").hide();
+    });
+
+    $(".toolbar-toolNavigation").mouseup(function(e) {
+        vectron_connectTool("navigation");
+        gui_writeLog('Navigation Tool Connected.');
         $("#zones-menu").hide();
     });
 
@@ -346,8 +341,8 @@ function eventHandler_init() {
                     else spawnTool_complete();
                 } else if(vectron_currentTool == "select" && vectron_toolActive) {
                     selectTool_complete();
-                } else if(vectron_currentTool == "move" && vectron_toolActive) {
-                    moveTool_complete();
+                } else if(vectron_currentTool == "navigation" && vectron_toolActive) {
+                    navigationTool_complete();
                 }
                 break;
             case 2:
@@ -376,8 +371,8 @@ function eventHandler_init() {
             case 1:
                 if(vectron_currentTool == "select" && !vectron_toolActive) {
                     selectTool_start();
-                } else if(vectron_currentTool == "move" && !vectron_toolActive) {
-                    moveTool_start();
+                } else if(vectron_currentTool == "navigation" && !vectron_toolActive) {
+                    navigationTool_start();
                 }
                 break;
             case 2:
@@ -399,15 +394,7 @@ function eventHandler_init() {
         cursor_pageY = event.pageY;
 
         if(eventHandler_space) {
-            var xdir = eventHandler_spaceX - cursor_pageX;
-            var ydir = eventHandler_spaceY - cursor_pageY;
-            vectron_screen.setViewBox(xdir, ydir, vectron_width, vectron_height);
-            var bbox = aamap_grid.getBBox();
-            //aamap_grid.translate(,);
-            aamap_grid.translate(
-                (Math.round(xdir/vectron_zoom)*vectron_zoom)-(bbox.x-(aamap_grid.bbox.x)),
-                (Math.round(ydir/vectron_zoom)*vectron_zoom)-(bbox.y-(aamap_grid.bbox.y))
-            );
+            navigationTool_progress();
             return;
         }
 
@@ -422,8 +409,8 @@ function eventHandler_init() {
                 spawnTool_currentObj.guide();
         } else if(vectron_currentTool == "select" && vectron_toolActive) {
             selectTool_progress();
-        } else if(vectron_currentTool == "move" && vectron_toolActive) {
-            moveTool_progress();
+        } else if(vectron_currentTool == "navigation" && vectron_toolActive) {
+            navigationTool_progress();
         }
 
     });
@@ -448,27 +435,20 @@ function eventHandler_init() {
     $(function() {
         $(document).keyup(function(evt) {
             if (evt.keyCode == 32 && eventHandler_space) {
-                vectron_panX = eventHandler_startPanX + ((cursor_pageX - eventHandler_spaceX) / vectron_zoom);
-                vectron_panY = eventHandler_startPanY + ((eventHandler_spaceY - cursor_pageY) / vectron_zoom);
-
                 eventHandler_space = false;
-                eventHandler_startPanX = null;
-                eventHandler_startPanY = null;
-
-                vectron_render();
-                cursor_render(cursor_pageX, cursor_pageY, vectron_zoom);
+                navigationTool_complete();
             }
         }).keydown(function(evt) {
             if (evt.keyCode == 32 && !eventHandler_space) {
                 eventHandler_space = true;
-                eventHandler_spaceX = cursor_realX;
-                eventHandler_spaceY = cursor_realY;
+                navigationTool_clickX = cursor_realX;
+                navigationTool_clickY = cursor_realY;
 
-                if(eventHandler_startPanX == null) {
-                    eventHandler_startPanX = vectron_panX;
+                if(navigationTool_startPanX == null) {
+                    navigationTool_startPanX = vectron_panX;
                 }
-                if(eventHandler_startPanY == null) {
-                    eventHandler_startPanY = vectron_panY;
+                if(navigationTool_startPanY == null) {
+                    navigationTool_startPanY = vectron_panY;
                 }
             }
         });
@@ -598,8 +578,10 @@ function eventHandler_init() {
         vectron_screen.setViewBox(xdir, ydir, vectron_width, vectron_height);
 
         var bbox = aamap_grid.getBBox();
-        aamap_grid.translate(-(bbox.x-(aamap_grid.bbox.x)),-(bbox.y-(aamap_grid.bbox.y)));
-        aamap_grid.translate(Math.round(xdir/vectron_zoom)*vectron_zoom,Math.round(ydir/vectron_zoom)*vectron_zoom)
+        aamap_grid.translate(
+            (Math.round(xdir/vectron_zoom)*vectron_zoom)-(bbox.x-(aamap_grid.bbox.x)),
+            (Math.round(ydir/vectron_zoom)*vectron_zoom)-(bbox.y-(aamap_grid.bbox.y))
+        );
 
         clearTimeout(__pan_timeout);
         __pan_timeout = setTimeout(function()
