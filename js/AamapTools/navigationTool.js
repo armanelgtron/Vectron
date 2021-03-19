@@ -37,6 +37,7 @@ function navigationTool_disconnect()
 {
     $(".toolbar-toolNavigation").attr("style", "");
     vectron_toolActive = false;
+    cursor_active = true;
 }
 
 function navigationTool_start()
