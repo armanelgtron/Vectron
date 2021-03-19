@@ -139,6 +139,7 @@ function aamap_undo() {
     if(obj.obj != null) obj.obj.remove();
 }
 
+var aamap_redo_state = "";
 function aamap_redo() {
     // ehh later
 }
@@ -198,7 +199,13 @@ function aamap_drawGrid() {
     }
     
     aamap_grid = vectron_screen.path(gridArray).attr("stroke", "#d6d6ec");
-    if(config_isDark) aamap_grid.attr('stroke', '#222');
+    {
+        aamap_grid.node.style.shapeRendering = "crispedges";
+        if(vectron_zoom > 8) aamap_grid.attr('stroke-width',2);
+    }
+    if(config_isDark) aamap_grid.attr('stroke', '#1a1a1a');
+
+    aamap_grid.bbox = aamap_grid.getBBox();
 }
 
 var entityMap = {

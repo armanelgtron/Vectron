@@ -399,7 +399,15 @@ function eventHandler_init() {
         cursor_pageY = event.pageY;
 
         if(eventHandler_space) {
-            vectron_screen.setViewBox(eventHandler_spaceX - cursor_pageX, eventHandler_spaceY - cursor_pageY, vectron_width, vectron_height);
+            var xdir = eventHandler_spaceX - cursor_pageX;
+            var ydir = eventHandler_spaceY - cursor_pageY;
+            vectron_screen.setViewBox(xdir, ydir, vectron_width, vectron_height);
+            var bbox = aamap_grid.getBBox();
+            //aamap_grid.translate(,);
+            aamap_grid.translate(
+                (Math.round(xdir/vectron_zoom)*vectron_zoom)-(bbox.x-(aamap_grid.bbox.x)),
+                (Math.round(ydir/vectron_zoom)*vectron_zoom)-(bbox.y-(aamap_grid.bbox.y))
+            );
             return;
         }
 
@@ -573,29 +581,55 @@ function eventHandler_init() {
         }
     }, 'keydown');
 
+    var __panX = 0, __panY = 0;
+    var __pan_timeout;
+    function __check_pan()
+    {
+        if(__panX == __panY && __panX == 0)
+        {
+            __panX = aamap_realX(vectron_panX);
+            __panY = aamap_realY(vectron_panY);
+        }
+    }
+    function __render_pan()
+    {
+        var xdir = (__panX - aamap_realX(vectron_panX))/2;
+        var ydir = (__panY - aamap_realY(vectron_panY))/2;
+        vectron_screen.setViewBox(xdir, ydir, vectron_width, vectron_height);
+
+        var bbox = aamap_grid.getBBox();
+        aamap_grid.translate(-(bbox.x-(aamap_grid.bbox.x)),-(bbox.y-(aamap_grid.bbox.y)));
+        aamap_grid.translate(Math.round(xdir/vectron_zoom)*vectron_zoom,Math.round(ydir/vectron_zoom)*vectron_zoom)
+
+        clearTimeout(__pan_timeout);
+        __pan_timeout = setTimeout(function()
+        {
+            __panX=__panY=0;
+            vectron_render()
+        },100);
+    }
+    function __adjust_pan(x,y)
+    {
+        __check_pan();
+        vectron_panX += x;
+        vectron_panY += y;
+        __render_pan();
+    }
     Mousetrap.bind('right', function(e) {
         if(!aamap_active) return;
-
-        vectron_panX -= 0.1;
-        vectron_render();
+        __adjust_pan(-0.1,0);
     });
     Mousetrap.bind('left', function(e) {
         if(!aamap_active) return;
-
-        vectron_panX += 0.1;
-        vectron_render();
+        __adjust_pan(0.1,0);
     });
     Mousetrap.bind('up', function(e) {
         if(!aamap_active) return;
-
-        vectron_panY -= 0.1;
-        vectron_render();
+        __adjust_pan(0,-0.1);
     });
     Mousetrap.bind('down', function(e) {
         if(!aamap_active) return;
-
-        vectron_panY += 0.1;
-        vectron_render();
+        __adjust_pan(0,0.1);
     });
     Mousetrap.bind('shift+space', function(e) {
         if(!aamap_active) return;

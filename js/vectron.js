@@ -73,8 +73,8 @@ function vectron_init() {
 function vectron_render() {
     if(config_snapToPosition)
     {
-        vectron_panX = Math.round(vectron_panX*4)/4;
-        vectron_panY = Math.round(vectron_panY*4)/4;
+        vectron_panX = Math.round(vectron_panX*10)/10;
+        vectron_panY = Math.round(vectron_panY*10)/10;
     }
 
     vectron_screen.clear();
