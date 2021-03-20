@@ -112,6 +112,7 @@ var __navigationTool_render_pan = function()
         vectron_render();
         if(__navigationTool_render_pan_custom)
             __navigationTool_render_pan_custom();
+        __navigationTool_render_pan_custom = null;
     },100);
 }
 function navigationTool_manualPan(x,y)
