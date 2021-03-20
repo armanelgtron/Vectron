@@ -108,6 +108,18 @@ function Spawn() {
             .attr({stroke: "#FF8ABE", "fill": "#FF8ABE"})
             .transform("R" + this.toDegrees());
 
+        // override translate function to adjust for rotation
+        {
+            var self = this;
+            this.obj.__translate = this.obj.translate;
+            this.obj.translate = function(x,y)
+            {
+                var dist = Math.hypot(y,x);
+                var dir = Math.atan2(self.yDir,self.xDir)-Math.atan2(-y,x);
+                this.__translate(dist*Math.cos(dir),dist*Math.sin(dir));
+            };
+        }
+
         if(this.isSelected) {
             selectTool_addHoverSetSelected(this);
         } else if(vectron_currentTool == "select") {
