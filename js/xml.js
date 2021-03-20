@@ -75,6 +75,7 @@ function xml_process(xml) {
 
     vectron_panX = -1*(max_x + min_x)/2;
     vectron_panY = -1*(max_y + min_y)/2;
+    vectron_zoom = (((vectron_width+vectron_height)/2))/((max_x-min_x)+(max_y-min_y));
     vectron_render();
 }
 

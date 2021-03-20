@@ -249,22 +249,15 @@ function eventHandler_init() {
     });
 
     $(".toolbar-toolZoomIn").mouseup(function(e) {
-        //if(vectron_zoom < 60) {
-        if(vectron_zoom == 1)
-            vectron_zoom += 1;
-        else
-            vectron_zoom *= 1.25;
-        vectron_zoom = Math.round(vectron_zoom);
+        vectron_zoom *= 1.1;
+        vectron_zoom_adjustment();
         vectron_render();
         $("#zones-menu").hide();
     });
 
     $(".toolbar-toolZoomOut").mouseup(function(e) {
-        if(vectron_zoom > 1) {
-            if(vectron_zoom == 2) vectron_zoom = 1;
-            vectron_zoom /= 1.25;
-        }
-        vectron_zoom = Math.round(vectron_zoom);
+        vectron_zoom /= 1.1;
+        vectron_zoom_adjustment();
         vectron_render();
         $("#zones-menu").hide();
     });
@@ -407,7 +400,7 @@ function eventHandler_init() {
             return;
         }
 
-        cursor_render(cursor_pageX, cursor_pageY, vectron_zoom);
+        cursor_render(cursor_pageX, cursor_pageY, vectron_zoom*vectron_grid_spacing);
 
         if(vectron_currentTool == "wall" && vectron_toolActive) {
             wallTool_currentObj.guide();
@@ -427,20 +420,33 @@ function eventHandler_init() {
 
     });
     
+    var prev_vectron_zoom = 0;
+    var __zoom_timeout;
     document.getElementById("canvas_container").onwheel=(function(event)
     {
         if(config_scrollWheelZoom)
         {
+            if(prev_vectron_zoom == 0)
+            {
+                prev_vectron_zoom = vectron_zoom;
+            }
             if(event.deltaY > 0)
             {
-                if(vectron_zoom > 1) vectron_zoom -= 1;
+                if(vectron_zoom > 0.01)
+                    vectron_zoom *= 0.98;
             }
             else
             {
-                vectron_zoom += 1;
+                vectron_zoom /= 0.98;
             }
             
-            vectron_render();
+            var vs = ((vectron_zoom)-prev_vectron_zoom)*(1/vectron_zoom);
+            vectron_screen.setViewBox(
+                (vectron_width/2)*vs, (vectron_height/2)*vs,
+                vectron_width-(vectron_width*vs), vectron_height-(vectron_height*vs)
+            );
+            clearTimeout(__zoom_timeout);
+            __zoom_timeout = setTimeout(function(){prev_vectron_zoom=0;vectron_render()},150);
         }
     });
 
@@ -596,22 +602,22 @@ function eventHandler_init() {
     Mousetrap.bind('right', function(e) {
         if(!aamap_active) return;
 
-        navigationTool_manualPan(-0.1,0);
+        navigationTool_manualPan(-1.6*vectron_zoom,0);
     });
     Mousetrap.bind('left', function(e) {
         if(!aamap_active) return;
 
-        navigationTool_manualPan(0.1,0);
+        navigationTool_manualPan(1.6*vectron_zoom,0);
     });
     Mousetrap.bind('up', function(e) {
         if(!aamap_active) return;
 
-        navigationTool_manualPan(0,-0.1);
+        navigationTool_manualPan(0,-1.6*vectron_zoom);
     });
     Mousetrap.bind('down', function(e) {
         if(!aamap_active) return;
 
-        navigationTool_manualPan(0,0.1);
+        navigationTool_manualPan(0,1.6*vectron_zoom);
     });
     Mousetrap.bind('shift+space', function(e) {
         if(!aamap_active) return;

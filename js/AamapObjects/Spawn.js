@@ -93,7 +93,7 @@ function Spawn() {
 
         var x = aamap_realX(this.x);
         var y = aamap_realY(this.y);
-        var scale = vectron_zoom;
+        var scale = 16;//vectron_zoom;
         this.obj = vectron_screen.path(
                 [
                     "M", x, y,
@@ -132,7 +132,7 @@ function Spawn() {
         this.guideUpdate();
         var x = aamap_realX(this.x);
         var y = aamap_realY(this.y);
-        var scale = vectron_zoom;
+        var scale = 16;//vectron_zoom;
         this.guideObj = vectron_screen.path(
             [
                 "M", x, y,

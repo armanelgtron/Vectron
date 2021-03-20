@@ -61,9 +61,10 @@ function navigationTool_progress()
     var ydir = navigationTool_clickY - cursor_pageY;
     vectron_screen.setViewBox(xdir, ydir, vectron_width, vectron_height);
     var bbox = aamap_grid.getBBox();
+    var adj = vectron_zoom*vectron_grid_spacing;
     aamap_grid.translate(
-        (Math.round(xdir/vectron_zoom)*vectron_zoom)-(bbox.x-(aamap_grid.bbox.x)),
-        (Math.round(ydir/vectron_zoom)*vectron_zoom)-(bbox.y-(aamap_grid.bbox.y))
+        (Math.round(xdir/adj)*adj)-(bbox.x-(aamap_grid.bbox.x)),
+        (Math.round(ydir/adj)*adj)-(bbox.y-(aamap_grid.bbox.y))
     );
 }
 
@@ -84,6 +85,7 @@ function navigationTool_complete()
 
 var __navigationTool_panX = 0, __navigationTool_panY = 0;
 var __navigationTool_pan_timeout;
+var __navigationTool_do_render_pan = true;
 var __navigationTool_render_pan_custom = null;
 var __navigationTool_check_pan = function()
 {
@@ -100,16 +102,20 @@ var __navigationTool_render_pan = function()
     vectron_screen.setViewBox(xdir, ydir, vectron_width, vectron_height);
 
     var bbox = aamap_grid.getBBox();
+    var adj = vectron_zoom*vectron_grid_spacing;
     aamap_grid.translate(
-        (Math.round(xdir/vectron_zoom)*vectron_zoom)-(bbox.x-(aamap_grid.bbox.x)),
-        (Math.round(ydir/vectron_zoom)*vectron_zoom)-(bbox.y-(aamap_grid.bbox.y))
+        (Math.round(xdir/adj)*adj)-(bbox.x-(aamap_grid.bbox.x)),
+        (Math.round(ydir/adj)*adj)-(bbox.y-(aamap_grid.bbox.y))
     );
 
     clearTimeout(__navigationTool_pan_timeout);
     __navigationTool_pan_timeout = setTimeout(function()
     {
-        __navigationTool_panX=__navigationTool_panY=0;
-        vectron_render();
+        if(__navigationTool_do_render_pan)
+        {
+            __navigationTool_panX=__navigationTool_panY=0;
+            vectron_render();
+        }
         if(__navigationTool_render_pan_custom)
             __navigationTool_render_pan_custom();
         __navigationTool_render_pan_custom = null;
@@ -123,27 +129,28 @@ function navigationTool_manualPan(x,y)
     __navigationTool_render_pan();
 }
 
-function navigationTool_autopan(customFunc)
+function navigationTool_autopan(customFunc,render)
 {
     if(customFunc)
     {
         __navigationTool_render_pan_custom = customFunc;
     }
+    __navigationTool_do_render_pan = render===undefined?true:render;
 
     if(cursor_pageY+20 > vectron_height)
     {
-        navigationTool_manualPan(0,0.5);
+        navigationTool_manualPan(0,8/vectron_zoom);
     }
     if(cursor_pageY < 20)
     {
-        navigationTool_manualPan(0,-0.5);
+        navigationTool_manualPan(0,-8/vectron_zoom);
     }
     if(cursor_pageX+20 > vectron_width)
     {
-        navigationTool_manualPan(-0.5,0);
+        navigationTool_manualPan(-8/vectron_zoom,0);
     }
     if(cursor_pageX < 20)
     {
-        navigationTool_manualPan(0.5,0);
+        navigationTool_manualPan(8/vectron_zoom,0);
     }
 }

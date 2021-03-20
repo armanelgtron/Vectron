@@ -172,6 +172,19 @@ function aamap_drawGrid() {
     if(aamap_grid != null) {
         aamap_grid.remove();
     }
+
+    if(config_autoAdjustGridSpacing)
+    {
+        while((vectron_zoom*vectron_grid_spacing) > 30)
+        {
+            vectron_grid_spacing /= 2;
+        }
+        while((vectron_zoom*vectron_grid_spacing) < 15)
+        {
+            vectron_grid_spacing *= 2;
+        }
+    }
+
     var gridArray = [];
     var midWidth = vectron_width/2 + (vectron_zoom * vectron_panX);
     var midHeight = vectron_height/2 - (vectron_zoom * vectron_panY);
@@ -179,29 +192,29 @@ function aamap_drawGrid() {
     /**
      * drawing from mid to width from top to bottom
      */
-    for(var i=midWidth; i < vectron_width; i+= vectron_zoom) {
+    for(var i=midWidth; i < vectron_width; i+= vectron_zoom*vectron_grid_spacing) {
         gridArray = gridArray.concat(["M", i, vectron_height, "L", i, 0]);
     }
 
     /**
      * drawing from mid to width from top to bottom
      */
-    for(var i=midWidth; i > 0; i -= vectron_zoom) {
+    for(var i=midWidth; i > 0; i -= vectron_zoom*vectron_grid_spacing) {
         gridArray = gridArray.concat(["M", i, vectron_height, "L", i, 0]);
     }
 
-    for(var i=midHeight; i < vectron_height; i+= vectron_zoom) {
+    for(var i=midHeight; i < vectron_height; i+= vectron_zoom*vectron_grid_spacing) {
         gridArray = gridArray.concat(["M", vectron_width, i, "L", 0, i]);
     }
 
-    for(var i=midHeight; i > 0; i -= vectron_zoom) {
+    for(var i=midHeight; i > 0; i -= vectron_zoom*vectron_grid_spacing) {
         gridArray = gridArray.concat(["M", vectron_width, i, "L", 0, i]);
     }
     
     aamap_grid = vectron_screen.path(gridArray).attr("stroke", "#d6d6ec");
     {
         aamap_grid.node.style.shapeRendering = "crispedges";
-        if(vectron_zoom > 8) aamap_grid.attr('stroke-width',2);
+        if(vectron_zoom*vectron_grid_spacing > 8) aamap_grid.attr('stroke-width',2);
     }
     if(config_isDark) aamap_grid.attr('stroke', '#1a1a1a');
 

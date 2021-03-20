@@ -31,7 +31,8 @@ var vectron_tools = ["select", "navigation", "wall", "zone", "spawn"];
 var vectron_currentTool = "";
 var vectron_toolActive = false;
 
-var vectron_zoom = 15;
+var vectron_grid_spacing = 16;
+var vectron_zoom = 1;//15
 var vectron_panX = 0;
 var vectron_panY = 0;
 
@@ -84,11 +85,32 @@ function vectron_render() {
     vectron_screen.setViewBox(0, 0, vectron_width, vectron_height);
     aamap_render();
 
-    document.getElementById("zoom").innerText = vectron_zoom;
+    vectron_write_info();
+}
+
+function vectron_write_info()
+{
+    document.getElementById("zoom").innerText = vectron_zoom*100;
+    document.getElementById("spacing").innerText = vectron_grid_spacing;
     
     document.getElementById("anchor-x").innerText = -(vectron_panX);
     document.getElementById("anchor-y").innerText = -(vectron_panY);
+}
 
+function vectron_zoom_adjustment()
+{
+    var len = (""+parseInt(vectron_zoom*100)).length;
+    if(vectron_zoom > 0.5)
+    {
+        vectron_zoom = ((vectron_zoom*100).toPrecision(len-1))/100;
+    }
+    else
+    {
+        vectron_zoom = ((vectron_zoom*100).toPrecision(5-len))/100;
+    }
+
+    // just in case something goes wrong...
+    if(vectron_zoom == 0) vectron_zoom = 1;
 }
 
 function vectron_disconnectTool() {
@@ -154,7 +176,7 @@ function vectron_destroyClickedElement(event) {
 }
 
 
-var vectron_startupXML ='<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?><!DOCTYPE Resource SYSTEM "sty.dtd"><Resource type="aamap" name="Vectron" version="0.2" author="Tristan" category="art"><Map version="0.2.8"><World><Field><Axes number="8"/><Wall height="4"><Point x="-1" y="4"/><Point x="-3" y="4"/></Wall><Wall height="4"><Point x="-1" y="4"/><Point x="1" y="4"/></Wall><Wall height="4"><Point x="-1" y="4"/><Point x="-1" y="0"/></Wall><Wall height="4"><Point x="-4" y="3"/><Point x="-5" y="4"/><Point x="-7" y="4"/><Point x="-8" y="3"/><Point x="-8" y="1"/><Point x="-7" y="0"/><Point x="-5" y="0"/><Point x="-4" y="1"/></Wall><Wall height="4"><Point x="-9" y="4"/><Point x="-12" y="4"/><Point x="-13" y="3"/><Point x="-13" y="1"/><Point x="-12" y="0"/><Point x="-9" y="0"/></Wall><Wall height="4"><Point x="-13" y="2"/><Point x="-10" y="2"/></Wall><Wall height="4"><Point x="-14" y="4"/><Point x="-16" y="0"/><Point x="-18" y="4"/></Wall><Wall height="4"><Point x="2" y="0"/><Point x="2" y="4"/></Wall><Wall height="4"><Point x="2" y="2"/><Point x="6" y="2"/></Wall><Wall height="4"><Point x="6" y="2"/><Point x="6" y="3"/><Point x="5" y="4"/><Point x="2" y="4"/></Wall><Wall height="4"><Point x="4" y="2"/><Point x="6" y="0"/></Wall><Zone effect="death"><ShapeCircle radius=" 2 " growth=""><Point x="9" y="2"/></ShapeCircle></Zone><Wall height="4"><Point x="12" y="0"/><Point x="12" y="4"/><Point x="16" y="0"/><Point x="16" y="4"/></Wall><Spawn x="-6" y="2" xdir="1" ydir="0"/></Field></World></Map></Resource>';
+var vectron_startupXML ='<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?><!DOCTYPE Resource SYSTEM "sty.dtd"><Resource type="aamap" name="Vectron" version="1.1" author="Tristan" category="art"><Map version="0.2.8"><World><Field><Axes number="8"/><Spawn x="-96" y="32" xdir="1" ydir="0"/><Zone effect="death"><ShapeCircle radius=" 32 " growth="0"><Point x="144" y="32"/></ShapeCircle></Zone><Wall height="4"><Point x="-16" y="64"/><Point x="-48" y="64"/></Wall><Wall height="4"><Point x="-16" y="64"/><Point x="16" y="64"/></Wall><Wall height="4"><Point x="-16" y="64"/><Point x="-16" y="0"/></Wall><Wall height="4"><Point x="-64" y="48"/><Point x="-80" y="64"/><Point x="-112" y="64"/><Point x="-128" y="48"/><Point x="-128" y="16"/><Point x="-112" y="0"/><Point x="-80" y="0"/><Point x="-64" y="16"/></Wall><Wall height="4"><Point x="-144" y="64"/><Point x="-192" y="64"/><Point x="-208" y="48"/><Point x="-208" y="16"/><Point x="-192" y="0"/><Point x="-144" y="0"/></Wall><Wall height="4"><Point x="-208" y="32"/><Point x="-160" y="32"/></Wall><Wall height="4"><Point x="-224" y="64"/><Point x="-256" y="0"/><Point x="-288" y="64"/></Wall><Wall height="4"><Point x="32" y="0"/><Point x="32" y="64"/></Wall><Wall height="4"><Point x="32" y="32"/><Point x="96" y="32"/></Wall><Wall height="4"><Point x="96" y="32"/><Point x="96" y="48"/><Point x="80" y="64"/><Point x="32" y="64"/></Wall><Wall height="4"><Point x="64" y="32"/><Point x="96" y="0"/></Wall><Wall height="4"><Point x="192" y="0"/><Point x="192" y="64"/><Point x="256" y="0"/><Point x="256" y="64"/></Wall></Field></World></Map></Resource><!-- Exported from Vectron 1.1 -->';
 
 
 

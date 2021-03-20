@@ -26,6 +26,7 @@ along with Vectron.  If not, see <http://www.gnu.org/licenses/>.
 var config_isDark = false;
 var config_scrollWheelZoom = true;
 var config_snapToPosition = true;
+var config_autoAdjustGridSpacing = true;
 
 function config_load()
 {
