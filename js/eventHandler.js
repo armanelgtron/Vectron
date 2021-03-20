@@ -291,9 +291,18 @@ function eventHandler_init() {
         if(vectron_currentTool == "select" && !vectron_toolActive) {
             selectTool_delete();
         } else if(vectron_currentTool == "wall" && vectron_toolActive) {
-            wallTool_disconnect();
-            vectron_currentTool = "";
-            vectron_connectTool("wall");
+            if(wallTool_currentObj.points.length > 1)
+            {
+                wallTool_currentObj.points.pop();
+                vectron_render();
+                wallTool_currentObj.guide();
+            }
+            else
+            {
+                wallTool_disconnect();
+                vectron_currentTool = "";
+                vectron_connectTool("wall");
+            }
         } else if(vectron_currentTool == "spawn" && vectron_toolActive) {
             spawnTool_disconnect();
             vectron_currentTool = "";
@@ -565,6 +574,24 @@ function eventHandler_init() {
             vectron_connectTool("zone");
         }
     }, 'keydown');
+
+    Mousetrap.bind('escape', function(e) {
+        if(vectron_toolActive)
+        {
+            if(vectron_currentTool == "wall")
+            {
+                wallTool_disconnect();
+                vectron_currentTool = "";
+                vectron_connectTool("wall");
+            }
+            else if(vectron_currentTool == "spawn")
+            {
+                spawnTool_disconnect();
+                vectron_currentTool = "";
+                vectron_connectTool("spawn");
+            }
+        }
+    });
 
     Mousetrap.bind('right', function(e) {
         if(!aamap_active) return;
