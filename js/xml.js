@@ -88,8 +88,14 @@ function xml_process_piece(xml)
         var spawn = $(this);
         var x = spawn.attr("x");
         var y = spawn.attr("y");
+        var angle = spawn.attr("angle");
         var xdir = spawn.attr("xdir");
         var ydir = spawn.attr("ydir");
+        if(angle !== undefined && !xdir && !ydir)
+        {
+            var rad = angle*Math.PI/180;
+            xdir = Math.cos(rad); ydir = Math.sin(rad);
+        }
 
         var spawnOb = new Spawn();
         spawnOb.x = parseFloat(x);
