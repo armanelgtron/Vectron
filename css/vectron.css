@@ -276,6 +276,7 @@ body.noscroll {
 #control_box {
   position:absolute;
   background:#FFF; width:600px;
+  width: min(100%, 600px);
   border:1px solid #aaa;
   top: 100px;
   z-index:5;
@@ -286,6 +287,15 @@ body.noscroll {
   display:none;
 }
 
+@media only screen and (max-height: 800px)
+{
+  #control_box { top:10% }
+}
+
+@media only screen and (max-height: 615px)
+{
+  #control_box { top:5% }
+}
 
 #control_box .gui-tool-name {
   margin-top:0;
@@ -297,6 +307,18 @@ body.noscroll {
 #control_box #gui-content {
   text-align:left;
   margin-bottom:20px;
+}
+
+@media only screen and (max-height: 530px)
+{
+  #control_box { top:0; height:100% }
+  #control_box #gui-tab-content { height:100% }
+  #control_box .tab-pane { min-height:100% }
+}
+
+@media only screen and (max-height: 480px)
+{
+  #control_box { top:-20px; height:auto }
 }
 
 #control_box h1 { text-align:left; }
