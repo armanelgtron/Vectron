@@ -1,8 +1,10 @@
 /*
 ********************************************************************************
 Vectron - map editor for Armagetron Advanced.
+Copyright (C) 2017  Glen Harpring       (armanelgtron@gmail.com)
 Copyright (C) 2014  Tristan Whitcher    (tristan.whitcher@gmail.com)
 David Dubois        (ddubois@jotunstudios.com)
+Copyright (C) 2010  Carlo Veneziano     (carlorfeo@gmail.com)
 ********************************************************************************
 
 This file is part of Vectron.
