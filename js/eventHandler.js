@@ -552,10 +552,8 @@ function eventHandler_init() {
        if(!aamap_active) return;
 
         if(vectron_currentTool == "zone") {
-            if(zoneTool_radius < 30) {
-                zoneTool_radius += 0.1;
-                zoneTool_guide();
-            }
+            zoneTool_radius = Math.floor(zoneTool_radius) + vectron_grid_spacing;
+            zoneTool_guide();
         }
     }, 'keydown');
 
@@ -563,10 +561,8 @@ function eventHandler_init() {
         if(!aamap_active) return;
 
         if(vectron_currentTool == "zone") {
-            if(zoneTool_radius < 30) {
-                zoneTool_radius = Math.floor(zoneTool_radius) + 1;
-                zoneTool_guide();
-            }
+            zoneTool_radius += 0.1*vectron_grid_spacing;
+            zoneTool_guide();
         }
     }, 'keydown');
 
@@ -575,22 +571,22 @@ function eventHandler_init() {
 
         if(vectron_currentTool == "zone") {
             if(zoneTool_radius > 0) {
-                zoneTool_radius -= 0.1;
+                zoneTool_radius = Math.floor(zoneTool_radius) - vectron_grid_spacing;
                 zoneTool_guide();
             }
         }
-    }, 'keydown');
+    });
 
     Mousetrap.bind('_', function(e) {
         if(!aamap_active) return;
 
         if(vectron_currentTool == "zone") {
             if(zoneTool_radius > 0) {
-                zoneTool_radius = Math.floor(zoneTool_radius) - 1;
+                zoneTool_radius -= 0.1*vectron_grid_spacing;
                 zoneTool_guide();
             }
         }
-    }, 'keydown');
+    });
 
     Mousetrap.bind('w', function(e) {
         if(!aamap_active) return;

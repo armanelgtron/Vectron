@@ -45,6 +45,7 @@ var zoneTool_type = 0;
 
 function zoneTool_connect() {
     $(".toolbar-toolZone").css("background-color", "rgba(0,0,0,0.3)");
+    zoneTool_radius = vectron_grid_spacing;
 }
 
 function zoneTool_disconnect() {
@@ -84,7 +85,7 @@ function zoneTool_complete() {
             }
         }
     }
-    aamap_add(new Zone(newX, newY, radius, zoneTool_type));
+    aamap_add(new Zone(newX, newY, radius, 0, zoneTool_type));
     zoneTool_guideObj.remove();
     vectron_render();
 }
