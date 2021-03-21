@@ -5,6 +5,7 @@
 
         <!-- Bootstrap -->
         <link href="./css/bootstrap.min.css" rel="stylesheet">
+        <link href="./css/bootstrap-extra.css" rel="stylesheet">
         <link href="./css/vectron.css" rel="stylesheet">
         <link id="theme" rel="stylesheet">
         <link href="./css/shepherd-theme-arrows.css" rel="stylesheet">
@@ -118,7 +119,7 @@
                         <label for="map_axes">Map Axes</label> (the directions turned in game. <i>axes = 360 / angle</i>) <br />
                         <div class="input-group">
                           <span class="input-group-addon">
-                            <input id="map_axes_forced" type="checkbox" title="Force the axes in the map?" />
+                            <input class="form-check-input" id="map_axes_forced" type="checkbox" title="Force the axes in the map?" />
                           </span>
                           <input type="number" class="form-control" id="map_axes" name="map_axes" min=2 max=360 default=4 />
                         </div>
@@ -195,18 +196,18 @@
 
 
                     <div class="tab-pane fade" id="gui-config">
-                      <input type="checkbox" id="dark-theme" name="dark-theme">
-                      <label for="dark-theme"> Enable dark theme <i>(beta)</i></label>
-                      <br />
-                      
-                      <input type="checkbox" id="show-info-bar" name="show-info-bar">
-                      <label for="show-info-bar"> Show info bar</label>
-                      <br />
-                      
-                      <input type="checkbox" id="show-debug-panel" name="show-debug-panel">
-                      <label for="show-debug-panel"> Show debug log information</label>
-                      <br />
-                      
+                      <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="dark-theme" name="dark-theme">
+                        <label class="form-check-label" for="dark-theme"> Enable dark theme <i>(beta)</i></label>
+                      </div>
+                      <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="show-info-bar" name="show-info-bar">
+                        <label class="form-check-label" for="show-info-bar"> Show info bar</label>
+                      </div>
+                      <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="show-debug-panel" name="show-debug-panel">
+                        <label class="form-check-label" for="show-debug-panel"> Show debug log information</label>
+                      </div>
                     </div>
 
                     <div class="tab-pane fade" id="gui-about">
