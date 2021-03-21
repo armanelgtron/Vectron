@@ -451,7 +451,21 @@ function eventHandler_init() {
     
     var prev_vectron_zoom = 0;
     var __zoom_timeout;
-    document.getElementById("canvas_container").onwheel=(function(event)
+    if(!("onwheel" in $("#canvas_container")[0]))
+    {
+        $("#canvas_container")[0].addEventListener("mousewheel",function(event)
+        {
+            if(event.wheelDeltaX != 0) return;
+            event.deltaY = -event.wheelDeltaY;
+            this.onwheel(event);
+        },false);
+        $("#canvas_container")[0].addEventListener("DOMMouseScroll",function(event)
+        {
+            event.deltaY = event.detail;
+            this.onwheel(event);
+        },false);
+    }
+    $("#canvas_container")[0].onwheel=(function(event)
     {
         if(config_scrollWheelZoom)
         {
