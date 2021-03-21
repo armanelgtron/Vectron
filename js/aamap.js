@@ -54,7 +54,10 @@ function aamap_save(name, author, category, version, dtd, axes, settings) {
         }
             xml += '<World>'+"\n";
                 xml += '<Field>'+"\n";
+                if($("#map_axes_forced")[0].checked)
+                {
                     xml += '<Axes number="'+axes+'"/>'+"\n";
+                }
                             for(var i = 0, ii = aamap_objects.length; i < ii; i++) {
                                 xml += aamap_objects[i].getXML();
                                 xml += "\n";
@@ -114,6 +117,15 @@ function aamap_panCenter() {
 function aamap_scale(factor) {
     for(var i = 0, ii = aamap_objects.length; i < ii; i++) {
         aamap_objects[i].scale(factor);
+    }
+    vectron_render();
+}
+
+function aamap_rotate(dir)
+{
+    for(var i=aamap_objects.length-1;i>=0;--i)
+    {
+        aamap_objects[i].rotate(dir);
     }
     vectron_render();
 }

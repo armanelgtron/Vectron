@@ -101,6 +101,24 @@ function Wall() {
         }
     }
 
+    this.rotate = function(dir)
+    {
+        for(var i = 0, ii = this.points.length; i < ii; i++)
+        {
+            var x = this.points[i].x, y = this.points[i].y;
+            if(dir > 0)
+            {
+                this.points[i].x = -y;
+                this.points[i].y = x;
+            }
+            else
+            {
+                this.points[i].x = y;
+                this.points[i].y = -x;
+            }
+        }
+    }
+
     this.getPosition = function()
     {
         var x=0,y=0;

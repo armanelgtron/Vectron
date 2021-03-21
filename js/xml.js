@@ -59,8 +59,10 @@ function xml_process(xml) {
     });
 
     xml_axes = 4;
+    $("#map_axes_forced")[0].checked = false;
     $(xml).find("Axes").each(function() {
         xml_axes = parseInt($(this).attr("number"));
+        $("#map_axes_forced")[0].checked = true;
     });
 
     gui_fillInput();

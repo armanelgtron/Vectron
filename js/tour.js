@@ -29,7 +29,7 @@ tour.addStep('welcome-step', {
 
 tour.addStep('gui-step', {
     title: "The GUI",
-    text: 'This button toggles the Vectron GUI. Press this to access information about the current map. This also lets you save your progress or load maps into the editor!',
+    text: "This button toggles the Vectron GUI. Press this to access information about the current map as well as map settings and configuration. This also lets you save your progress or load maps into the editor!",
     attachTo: '.toolbar-gui-open right',
     buttons: [{
         text: 'Back',
@@ -75,9 +75,33 @@ tour.addStep('select-step', {
 
 });
 
+tour.addStep('navigation-step', {
+    title: "Navigation Tool",
+    text: "The navigation tool allows you to navigate around the map just by clicking and dragging.",
+    attachTo: '.toolbar-toolNavigation right',
+    buttons: [{
+        text: 'Back',
+        classes: 'shepherd-button-secondary',
+        action: tour.back
+    }, {
+        text: 'Next',
+        action: tour.next
+    }],
+
+    when: {
+        show: function() {
+            $('.toolbar-toolNavigation').addClass('highlight');
+        },
+        hide: function() {
+            $('.toolbar-toolNavigation').removeClass('highlight');
+        }
+    }
+
+});
+
 tour.addStep('wall-step', {
     title: "Wall Tool",
-    text: 'The wall tool allows you to place walls on the map. Click once to start a wall and to add a new point. Double click to end the wall.',
+    text: "The wall tool allows you to place walls on the map. Click once to start a wall and to add a new point. Double click to end the wall, escape to cancel.",
     attachTo: '.toolbar-toolWall right',
     buttons: [{
         text: 'Back',
@@ -173,7 +197,7 @@ tour.addStep('lock-step', {
 
 tour.addStep('zoom-step', {
     title: "Zoom In / Zoom Out",
-    text: 'The zoom buttons allow the canvas to be displayed larger or smaller. This does not actually scale the map to a new grid size.',
+    text: "The zoom buttons allow the canvas to be displayed larger or smaller, automatically scaling the grid as well. You can also use the scroll wheel.",
     attachTo: '.toolbar-toolZoomIn right',
     buttons: [{
         text: 'Back',
@@ -195,6 +219,7 @@ tour.addStep('zoom-step', {
 
 });
 
+/*
 tour.addStep('scale-step', {
     title: "Scale Up / Scale Down",
     text: 'The scale buttons allow you to actually rescale the map to change the unit size. This is useful if you need more grid space somewhere you did not originally plan for.',
@@ -218,6 +243,7 @@ tour.addStep('scale-step', {
     }
 
 });
+*/
 
 tour.addStep('cancel-step', {
     title: "Cancel action / Delete last",

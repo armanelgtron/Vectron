@@ -134,6 +134,35 @@ function eventHandler_init() {
             hide_debug();
     });
 
+    // Map Adjustments
+    $("#scale_map").mouseup(function(e)
+    {
+        aamap_scale(parseFloat($("#map_scale").val()));
+        aamap_panCenter();
+    });
+
+    $("#map_rotate_left").mouseup(function(e)
+    {
+        aamap_rotate(-1);
+        aamap_panCenter();
+    });
+    $("#map_rotate_right").mouseup(function(e)
+    {
+        aamap_rotate(1);
+        aamap_panCenter();
+    });
+
+    $("#move_map").mouseup(function(e)
+    {
+        var x = parseFloat($("#map_move_x").val());
+        var y = parseFloat($("#map_move_y").val());
+        for(var i=aamap_objects.length-1;i>=0;--i)
+        {
+            aamap_objects[i].move(x, y);
+        }
+        aamap_panCenter();
+    });
+
 
     $(".toolbar-copy").mouseup(function(e) {
         selectTool_copy();

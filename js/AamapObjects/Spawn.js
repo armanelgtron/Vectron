@@ -155,6 +155,22 @@ function Spawn() {
         this.y *= factor;
     }
 
+    this.rotate = function(dir)
+    {
+        var x = this.x, y = this.y;
+        var xdir = this.xDir, ydir = this.yDir;
+        if(dir > 0)
+        {
+            this.x = -y; this.y = x;
+            this.xDir = -ydir; this.yDir = xdir;
+        }
+        else
+        {
+            this.x = y; this.y = -x;
+            this.xDir = ydir; this.yDir = -xdir;
+        }
+    }
+
     this.getPosition = function()
     {
         return [this.x,this.y];
