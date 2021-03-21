@@ -187,6 +187,8 @@ function aamap_drawGrid() {
         aamap_grid.remove();
     }
 
+    if(vectron_grid_spacing <= 0) return;
+
     if(config_autoAdjustGridSpacing)
     {
         while((vectron_zoom*vectron_grid_spacing) > 30)
