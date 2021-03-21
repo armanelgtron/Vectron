@@ -25,6 +25,7 @@ along with Vectron.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 var zoneTool_typeArray = {
+    undefined: ["null", "#888888"],
     0: ["death", "#ff0000"],
     1: ["win", "#00a800"],
     2: ["target", "#00ff00"],

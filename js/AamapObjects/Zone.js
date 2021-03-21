@@ -24,7 +24,13 @@ along with Vectron.  If not, see <http://www.gnu.org/licenses/>.
 
 */
 
+var zone_warning;
 function Zone(x, y, radius, growth, type) {
+    if(isNaN(type) && !zone_warning)
+    {
+        alert("Warning\n\nZones I don't know how to deal with were detected.\nAny special data associated with these zones will be lost.\nAfter exporting, you must make sure to fix the zone type of the zone(s) shown in grey.\n\nThis message will not be seen again this session.");
+        zone_warning = true;
+    }
 
     this.objectID = vectron_objectID;
     vectron_objectID++;
