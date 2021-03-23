@@ -149,11 +149,23 @@ window.onload = function() {
 function vectron_saveTextAsFile(xml, filename)
 {
     var textToWrite = xml;
-    var textFileAsBlob = new Blob([textToWrite], {type:'text/plain'});
+    var textFileAsBlob;
+    try
+    {
+        textFileAsBlob = new Blob([textToWrite], {type:"text/xml"});
+    }
+    catch(e)
+    {
+        var BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder || window.MozBlobBuilder || window.MSBlobBuilder;
+        var blob = new BlobBuilder(); blob.append(textToWrite);
+        textFileAsBlob = blob.getBlob("text/xml");
+        console.log(textFileAsBlob);
+    }
     var fileNameToSaveAs = filename;
 
     var downloadLink = document.createElement("a");
     downloadLink.download = fileNameToSaveAs;
+    downloadLink.target = "_blank";
     downloadLink.innerHTML = "Download File";
     if (window.webkitURL != null)
     {
