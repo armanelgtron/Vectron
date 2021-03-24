@@ -145,12 +145,20 @@ function eventHandler_init() {
 
     $("#map_rotate_left").mouseup(function(e)
     {
-        aamap_rotate(-1);
+        aamap_rotateSimple(-1);
         aamap_panCenter();
     });
     $("#map_rotate_right").mouseup(function(e)
     {
-        aamap_rotate(1);
+        aamap_rotateSimple(1);
+        aamap_panCenter();
+    });
+    
+    $("#rotate_map").mouseup(function(e)
+    {
+        var ang = parseFloat($("#map_rot_angle").val());
+        if(isNaN(ang)) { alert("invalid value!"); return; }
+        aamap_rotate(ang*Math.PI/180);
         aamap_panCenter();
     });
 

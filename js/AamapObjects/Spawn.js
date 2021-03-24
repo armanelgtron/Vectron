@@ -157,7 +157,19 @@ function Spawn() {
         this.y *= factor;
     }
 
-    this.rotate = function(dir)
+    this.rotate = function(rad)
+    {
+        var dist = Math.sqrt(Math.pow(this.x,2)+Math.pow(this.y,2));
+        var newrad = Math.atan2(this.y,this.x)-rad;
+        this.x = dist*Math.cos(newrad);
+        this.y = dist*Math.sin(newrad);
+
+        newrad = Math.atan2(this.yDir,this.xDir)-rad;
+        this.xDir = Math.cos(newrad);
+        this.yDir = Math.sin(newrad);
+    }
+
+    this.rotateSimple = function(dir)
     {
         var x = this.x, y = this.y;
         var xdir = this.xDir, ydir = this.yDir;

@@ -34,7 +34,7 @@
         <script type="text/javascript" src="./js/vectron.js"></script>
 
         <script type="text/javascript">
-            var targetVersion = 1.101;
+            var targetVersion = 1.102;
             if(window.vtVersion != targetVersion) location.reload(true);
         </script>
 
@@ -150,6 +150,9 @@
                         </style>
                         <button id="map_rotate_left" class="btn btn-default" title="Rotate left"><span class="glyphicon glyphicon-repeat rotate-left"></span></button>
                         <button id="map_rotate_right" class="btn btn-default" title="Rotate right"><span class="glyphicon glyphicon-repeat rotate-right"></span></button>
+                        or custom relative angle:
+                        <input type="text" style="display:inline-block;width:31.8%" class="form-control" id="map_rot_angle" name="map_rot_angle" value="0" />
+                        <button id="rotate_map" style="width:14%" class="btn btn-default">Rotate</button>
                       </div>
                       <div class="form-group">
                         <label>Move <small>(translate)</small> Map</label> <br />

@@ -103,7 +103,18 @@ function Wall() {
         }
     }
 
-    this.rotate = function(dir)
+    this.rotate = function(rad)
+    {
+        for(var i = 0, ii = this.points.length; i < ii; i++)
+        {
+            var dist = Math.sqrt(Math.pow((this.points[i].x),2)+Math.pow((this.points[i].y),2));
+            var newrad = Math.atan2(this.points[i].y,this.points[i].x)-rad;
+            this.points[i].x = dist*Math.cos(newrad);
+            this.points[i].y = dist*Math.sin(newrad);
+        }
+    }
+
+    this.rotateSimple = function(dir)
     {
         for(var i = 0, ii = this.points.length; i < ii; i++)
         {
