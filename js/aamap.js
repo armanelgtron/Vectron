@@ -123,11 +123,20 @@ function aamap_scale(factor) {
     vectron_render();
 }
 
-function aamap_rotate(dir)
+function aamap_rotate(rad)
 {
     for(var i=aamap_objects.length-1;i>=0;--i)
     {
-        aamap_objects[i].rotate(dir);
+        aamap_objects[i].rotate(rad);
+    }
+    vectron_render();
+}
+
+function aamap_rotateSimple(dir)
+{
+    for(var i=aamap_objects.length-1;i>=0;--i)
+    {
+        aamap_objects[i].rotateSimple(dir);
     }
     vectron_render();
 }
