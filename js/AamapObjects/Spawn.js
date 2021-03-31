@@ -77,8 +77,8 @@ function Spawn() {
         var snapRad = (Math.PI * fraction) / axes * 2;
 
         // get sine and cosine
-        this.xDir = Math.round(Math.cos(snapRad));
-        this.yDir = Math.round(Math.sin(snapRad));
+        this.xDir = (Math.cos(snapRad));
+        this.yDir = (Math.sin(snapRad));
 
         // sin and cos functions return weird numbers in some cases...
         // fix required
