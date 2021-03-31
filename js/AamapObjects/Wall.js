@@ -40,6 +40,8 @@ function Wall() {
     this.points = [];
     this.pathArray = [];
 
+    this.height = 4;
+
     this.xml = 'Wall';
 
     this.render = function() {
@@ -152,7 +154,7 @@ function Wall() {
     }
 
     this.getXML = function() {
-        var xml = '<Wall height="4">';
+        var xml = '<Wall height="'+this.height+'">';
         for(var i = 0, ii = this.points.length; i < ii; i++) {
             xml += '<Point x="' + this.points[i].x + '" y="'+ this.points[i].y + '"/>';
         }
@@ -161,7 +163,7 @@ function Wall() {
     }
 
     this.outputFriendlyXML = function() {
-        gui_writeLog(escapeHtml('<Wall height="4">'));
+        gui_writeLog(escapeHtml('<Wall height="'+this.height+'">'));
         for(var i = 0, ii = this.points.length; i < ii; i++) {
             gui_writeLog('&nbsp;&nbsp;' + escapeHtml('<Point x="' + this.points[i].x + '" y="'+ this.points[i].y + '"/>'));
         }

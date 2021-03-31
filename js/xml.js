@@ -139,6 +139,7 @@ function xml_process_piece(xml)
         });
         var wallObj = new Wall();
         wallObj.points = points;
+        if($(this).attr("height")) wallObj.height = $(this).attr("height");
         wallObj.render();
         aamap_add(wallObj);
     });
