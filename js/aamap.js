@@ -209,6 +209,8 @@ function aamap_drawGrid() {
             vectron_grid_spacing *= 2;
         }
     }
+    
+    var gridSpacing = vectron_zoom*vectron_grid_spacing;
 
     var gridArray = [];
     var midWidth = vectron_width/2 + (vectron_zoom * vectron_panX);
@@ -217,23 +219,23 @@ function aamap_drawGrid() {
     /**
      * drawing from mid to width from top to bottom
      */
-    for(var i=midWidth; i < vectron_width; i+= vectron_zoom*vectron_grid_spacing) {
-        gridArray = gridArray.concat(["M", i, vectron_height, "L", i, 0]);
+    for(var i=midWidth; i < vectron_width; i+= gridSpacing) {
+        gridArray.push("M", i, vectron_height, "L", i, 0);
     }
 
     /**
      * drawing from mid to width from top to bottom
      */
-    for(var i=midWidth; i > 0; i -= vectron_zoom*vectron_grid_spacing) {
-        gridArray = gridArray.concat(["M", i, vectron_height, "L", i, 0]);
+    for(var i=midWidth; i > 0; i -= gridSpacing) {
+        gridArray.push("M", i, vectron_height, "L", i, 0);
     }
 
-    for(var i=midHeight; i < vectron_height; i+= vectron_zoom*vectron_grid_spacing) {
-        gridArray = gridArray.concat(["M", vectron_width, i, "L", 0, i]);
+    for(var i=midHeight; i < vectron_height; i+= gridSpacing) {
+        gridArray.push("M", vectron_width, i, "L", 0, i);
     }
 
-    for(var i=midHeight; i > 0; i -= vectron_zoom*vectron_grid_spacing) {
-        gridArray = gridArray.concat(["M", vectron_width, i, "L", 0, i]);
+    for(var i=midHeight; i > 0; i -= gridSpacing) {
+        gridArray.push("M", vectron_width, i, "L", 0, i);
     }
     
     aamap_grid = vectron_screen.path(gridArray).attr("stroke", "#d6d6ec");
