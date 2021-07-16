@@ -36,7 +36,7 @@ function _config_check_default(item)
     switch(item)
     {
         case "darkTheme": return "true";
-        case "showInfoBar": return "false";
+        case "showInfoBar": return "true";
         case "showDebug": return "false";
     }
 }
