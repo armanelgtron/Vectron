@@ -89,7 +89,9 @@ function xml_process_piece(xml)
     var ptsx = [];
     var ptsy = [];
 
-    $(xml).find("Spawn").each(function() {
+    $(xml).find("*").each(function(){switch(this.tagName.toLowerCase())
+    {
+    case "spawn": {
         var spawn = $(this);
         var x = spawn.attr("x");
         var y = spawn.attr("y");
@@ -111,9 +113,9 @@ function xml_process_piece(xml)
         aamap_add(
             spawnOb
         );
-    });
-
-    $(xml).find("Zone").each(function() {
+    } break;
+    
+    case "zone": {
         var zone = $(this);
         var effect = zone.attr("effect");
         var radius = zone.find("ShapeCircle").attr("radius");
@@ -125,9 +127,9 @@ function xml_process_piece(xml)
         aamap_add(
             new Zone(parseFloat(x), parseFloat(y), parseFloat(radius), parseFloat(growth)||0, zoneTool_whatType[effect])
         );
-    });
-
-    $(xml).find("Wall").each(function() {
+    } break;
+    
+    case "wall": {
         var wall = $(this);
         var points = [];
         wall.find("Point").each(function() {
@@ -142,7 +144,10 @@ function xml_process_piece(xml)
         if($(this).attr("height")) wallObj.height = $(this).attr("height");
         wallObj.render();
         aamap_add(wallObj);
-    });
+    } break;
+    
+    }});
+
 
     return [ptsx, ptsy];
 }
