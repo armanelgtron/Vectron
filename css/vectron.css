@@ -253,8 +253,30 @@ body.noscroll {
   background-image:url('../images/Zoom/Shrink.png');
 }
 
-.toolbar-disconnect {
+.toolbar-disconnect[data-mode="remove"]:after {
+    font-family: 'Glyphicons Halflings';
+    content: "\e014";
+    font-size: 18px;
+    
+    position:relative;
+    top:3px;
+}
+.toolbar-disconnect[data-mode="undo"]:after {
     font-family: sans-serif;
+    content: "\21b6";
+    font-size: 26px;
+    
+    position:relative;
+    top:4px; left:-1px;
+}
+
+.toolbar-redo:after {
+    font-family: sans-serif;
+    content: "\21b7";
+    font-size: 26px;
+    
+    position:relative;
+    top:4px; left:-0px;
 }
 
 .shepherd-cancel-link {

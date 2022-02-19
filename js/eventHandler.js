@@ -345,6 +345,10 @@ function eventHandler_init() {
         }
         $("#zones-menu").hide();
     });
+    
+    $(".toolbar-disconnect").mouseover(function(e) {
+        eventHandler_updateDisconnect();
+    });
 
     $(".toolbar-redo").mouseup(function(e) {
         aamap_redo();
@@ -674,6 +678,26 @@ function eventHandler_init() {
         aamap_panCenter();
     });
 
+}
+
+function eventHandler_updateDisconnect()
+{
+    if( vectron_currentTool == "select" && !vectron_toolActive )
+    {
+        $(".toolbar-disconnect").attr("data-mode", "remove");
+    }
+    else if( vectron_currentTool == "wall" && vectron_toolActive )
+    {
+        $(".toolbar-disconnect").attr("data-mode", "remove");
+    }
+    else if( vectron_currentTool == "spawn" && vectron_toolActive )
+    {
+        $(".toolbar-disconnect").attr("data-mode", "remove");
+    }
+    else 
+    {
+        $(".toolbar-disconnect").attr("data-mode", "undo");
+    }
 }
 
 window.onresize = function() {

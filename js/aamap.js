@@ -141,6 +141,8 @@ function aamap_rotateSimple(dir)
     vectron_render();
 }
 
+var aamap_redo_objects = [];
+
 function aamap_add(aamapObject) {
     aamap_objects.push(aamapObject);
     aamap_xml += aamapObject.xml;
@@ -153,18 +155,24 @@ function aamap_remove(aamapObject) {
         if(aamap_objects[index].obj != null)
             aamap_objects[index].obj.remove();
         aamap_objects.splice(index, 1);
+        aamap_redo_objects.push();
     }
 }
 
 function aamap_undo() {
     gui_writeLog("Undone latest addition.");
     var obj = aamap_objects.pop();
+    if( !obj ) return void(alert("Nothing to undo!"));
     if(obj.obj != null) obj.obj.remove();
+    aamap_redo_objects.push(obj);
 }
 
-var aamap_redo_state = "";
 function aamap_redo() {
-    // ehh later
+    var obj = aamap_redo_objects.pop();
+    if( obj ) aamap_objects.push(obj);
+    else alert("Nothing to redo!");
+    
+    aamap_render();
 }
 
 function aamap_activate() {
