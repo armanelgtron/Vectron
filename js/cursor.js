@@ -68,8 +68,8 @@ function cursor_render(newX, newY, spacing) {
     cursor_neverSnappedX = newX;
     cursor_neverSnappedY = newY;
 
-    document.getElementById("cursor-x").innerText = aamap_mapX(cursor_active?cursor_realX:newX);
-    document.getElementById("cursor-y").innerText = aamap_mapY(cursor_active?cursor_realY:newY);
+    document.getElementById("cursor-x").innerText = (Math.round(aamap_mapX(cursor_active?cursor_realX:newX)*1e10)/1e10).toPrecision(6);
+    document.getElementById("cursor-y").innerText = (Math.round(aamap_mapY(cursor_active?cursor_realY:newY)*1e10)/1e10).toPrecision(6);
 
     if(!cursor_active) return;
 
