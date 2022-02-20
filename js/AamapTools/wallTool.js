@@ -59,6 +59,7 @@ function wallTool_start() {
 
     wallTool_currentObj.render();
     vectron_toolActive = true;
+    eventHandler_updateDisconnect();
 }
 
 function wallTool_progress() {
@@ -82,6 +83,7 @@ function wallTool_complete() {
         wallTool_currentObj.guideObj.remove();
         wallTool_currentObj = null;
         vectron_toolActive = false;
+        eventHandler_updateDisconnect();
         gui_writeLog("Wall canceled, < 2 points");
         return;
     } else {
@@ -96,4 +98,5 @@ function wallTool_complete() {
     aamap_add(wallTool_currentObj);
     wallTool_currentObj = null;
     vectron_toolActive = false;
+    eventHandler_updateDisconnect();
 }
