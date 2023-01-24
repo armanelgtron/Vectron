@@ -700,7 +700,14 @@ function eventHandler_updateDisconnect()
     }
 }
 
+var __resize_timeout;
 window.onresize = function() {
-    vectron_render();
+    var width = $("#canvas_container").width();
+    var height = $("#canvas_container").height();
+    vectron_screen.setSize(width, height);
+    vectron_screen.setViewBox((vectron_width-width)/2, (vectron_height-height)/2, width, height);
+    
+    clearTimeout(__resize_timeout);
+    __resize_timeout = setTimeout(function(){vectron_render()},150);
 }
 
