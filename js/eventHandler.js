@@ -36,23 +36,40 @@ function eventHandler_init() {
     $("#canvas_container").on("contextmenu", function(e) {
         aamap_active = false;
         $contextMenu.css({
-            display: "block",
-            left: e.pageX,
-            top: e.pageY
+            left: ( $contextMenu.width()+e.pageX > $("body").width() ) ? 
+                    (e.pageX - $contextMenu.width() + 4) : 
+                e.pageX,
+            top: ( $contextMenu.height()+e.pageY > $("body").height() ) ? (
+                    ( $contextMenu.height() >= ( $("body").height() - 4 ) || e.pageY < $contextMenu.height() ) ? 
+                        0 : (e.pageY - $contextMenu.height() + 4)
+                    ) : 
+                e.pageY,
         });
+        $contextMenu.fadeIn(150);
         return false;
     });
 
-    $contextMenu.on("click", "a", function() {
+    $contextMenu.on("mouseup", "a", function() {
         if(!aamap_active) {
             $contextMenu.hide();
             aamap_active = true;
             return;
         }
     });
+    
+    $contextMenu.on("contextmenu", function(e) {
+        aamap_active = true;
+        $contextMenu.fadeOut(150);
+        return false;
+    });
+
 
     $('body').on("click", function() {
-        $contextMenu.hide();
+        if( !aamap_active )
+        {
+            $contextMenu.hide();
+            aamap_active = true;
+        }
     });
 
 
@@ -212,7 +229,7 @@ function eventHandler_init() {
     });
 
     $("#zone-base .toolbar-toolZone").mouseup(function(e) {
-        $("#zones-menu").toggle();
+        $("#zones-menu").toggle(200, "swing");
     });
 
     $(".toolbar-toolZone-death").mouseup(function(e) {
@@ -369,7 +386,7 @@ function eventHandler_init() {
     $("#canvas_container").mouseup(function(e) {
         e.preventDefault();
         if(!aamap_active) {
-            $contextMenu.hide();
+            $contextMenu.fadeOut(150);
             aamap_active = true;
             return;
         }

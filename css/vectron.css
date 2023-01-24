@@ -379,4 +379,6 @@ body.noscroll {
 #contextMenu {
   position: absolute;
   display:none;
+  max-height: 100vh;
+  overflow-y: auto;
 }
