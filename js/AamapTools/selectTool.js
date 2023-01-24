@@ -171,7 +171,11 @@ function selectTool_progress() {
         realY = endRealY;
         height *= -1;
     }
+    
+    //
+    selectTool_selectArea(selectTool_mapX, selectTool_mapY, aamap_mapX(endRealX), aamap_mapY(endRealY), false);
 
+    // draw selecting box
     selectTool_guideObj = vectron_screen.rect(realX, realY, width, height)
     .attr({"stroke": "#51a0ff", "stroke-opacity": "0.5", "fill": "#51a0ff", "fill-opacity": "0.3"});
 }
@@ -209,7 +213,7 @@ function selectTool_complete() {
         return;
     }
 
-    if(selectTool_guideObj != null) selectTool_guideObj.remove();
+    if(selectTool_guideObj != null) selectTool_guideObj.animate({ opacity : 0 }, 150);
     else {
         gui_writeLog("unknown error occured.");
     }
@@ -227,20 +231,40 @@ function selectTool_delete() {
     vectron_render();
 }
 
-function selectTool_selectArea(xStart, yStart, xEnd, yEnd) {
+function selectTool_selectArea(xStart, yStart, xEnd, yEnd, select)
+{
+    if( select === undefined ) select = true;
+    
+    var selectFunc = select ? (function()
+        {
+            selectTool_select(curObj);
+            selectTool_selectedObjs.push( curObj );
+        }
+    ) : (function()
+        {
+            // give to-be-selected items a green glow
+            curObj.glowObj.attr("stroke", "#44ff44");
+        }
+    );
+    
     selectedObjs = [];
     var params = selectTool_orderCorners( xStart, yStart, xEnd, yEnd ); 
 
     //params = [left, top, right, bottom]
     for( var i = 0; i < aamap_objects.length; i++ ) {
         var curObj = aamap_objects[i];
+        
+        // reset glow before and during selecting
+        curObj.glowObj.attr("stroke", (
+            selectTool_selectedObjs.indexOf() !== -1 )?("#375ffc"):(config_isDark?"#000000":"#FFFFFF")
+        );
+        
         if( curObj instanceof Wall ) {
             for(var j = 0; j < curObj.points.length - 1; j++) {
                 var p1 = curObj.points[j];
                 var p2 = curObj.points[j+1];
                 if(selectTool_lineIntersectsRect(p1, p2, params[0], params[1], params[2], params[3])) {
-                    selectTool_select(curObj);
-                    selectTool_selectedObjs.push( curObj );
+                    selectFunc();
                     break;
                 }
             }
@@ -250,21 +274,18 @@ function selectTool_selectArea(xStart, yStart, xEnd, yEnd) {
 
             if(selectTool_circIntersectsRect(new WallPoint(curObj.x, curObj.y), curObj.radius, 
                 params[0], params[1], params[2], params[3])) {
-                selectTool_select(curObj);
-                selectTool_selectedObjs.push( curObj );
-
+                selectFunc();
             }
         } 
         
         else {
             if( params[0] - 0.05 <= curObj.x && curObj.x <= params[2] + 0.05 &&
                 params[1] + 0.05 >= curObj.y && curObj.y >= params[3] - 0.05 ) {
-                
-                selectTool_select(curObj);
-                selectTool_selectedObjs.push( curObj );
+                selectFunc();
             }
         }
     }
+    if( select )
     gui_writeLog(selectTool_selectedObjs.length);
 }
 

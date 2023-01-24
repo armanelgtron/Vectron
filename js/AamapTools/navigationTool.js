@@ -97,7 +97,7 @@ var __navigationTool_check_pan = function()
         __navigationTool_panY = aamap_realY(vectron_panY);
     }
 }
-var __navigationTool_render_pan = function()
+var __navigationTool_render_pan = function(urgent)
 {
     var xdir = (__navigationTool_panX - aamap_realX(vectron_panX))/2;
     var ydir = (__navigationTool_panY - aamap_realY(vectron_panY))/2;
@@ -121,13 +121,20 @@ var __navigationTool_render_pan = function()
         if(__navigationTool_render_pan_custom)
             __navigationTool_render_pan_custom();
         __navigationTool_render_pan_custom = null;
-    },100);
+    },urgent?0:100);
 }
 function navigationTool_manualPan(x,y)
 {
     __navigationTool_check_pan();
     vectron_panX += x;
     vectron_panY += y;
+    if( vectron_currentTool == "select" && vectron_toolActive )
+    {
+        selectTool_realX = aamap_realX(aamap_mapX(selectTool_realX)+x);
+        selectTool_realY = aamap_realY(aamap_mapY(selectTool_realY)+y);
+        __navigationTool_render_pan(true);
+        return;
+    }
     __navigationTool_render_pan();
 }
 

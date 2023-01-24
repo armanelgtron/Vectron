@@ -81,7 +81,13 @@ function aamap_render() {
     }
 
     if(vectron_currentTool == "wall" && vectron_toolActive)
+    {
         wallTool_currentObj.render();
+    }
+    else if( vectron_currentTool == "select" && vectron_toolActive )
+    {
+        selectTool_progress();
+    }
 }
 
 function aamap_panCenter() {
