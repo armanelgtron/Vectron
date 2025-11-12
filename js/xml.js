@@ -120,12 +120,20 @@ function xml_process_piece(xml)
         var effect = zone.attr("effect");
         var radius = zone.find("ShapeCircle").attr("radius");
         var growth = zone.find("ShapeCircle").attr("growth");
+        var option;
+        switch(effect)
+        {
+            case "rubber":
+                option = zone.attr("rubberVal");
+            default:
+                option = undefined;
+        }
         x = zone.find("Point").attr("x");
         y = zone.find("Point").attr("y");
         ptsx.push(parseFloat(x));
         ptsy.push(parseFloat(y));
         aamap_add(
-            new Zone(parseFloat(x), parseFloat(y), parseFloat(radius), parseFloat(growth)||0, zoneTool_whatType[effect])
+            new Zone(parseFloat(x), parseFloat(y), parseFloat(radius), parseFloat(growth)||0, zoneTool_whatType[effect], option)
         );
     } break;
     

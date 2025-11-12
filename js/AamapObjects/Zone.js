@@ -25,7 +25,7 @@ along with Vectron.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 var zone_warning;
-function Zone(x, y, radius, growth, type) {
+function Zone(x, y, radius, growth, type, option) {
     if(isNaN(type) && !zone_warning)
     {
         alert("Warning\n\nZones I don't know how to deal with were detected.\nAny special data associated with these zones will be lost.\nAfter exporting, you must make sure to fix the zone type of the zone(s) shown in grey.\n\nThis message will not be seen again this session.");
@@ -47,6 +47,16 @@ function Zone(x, y, radius, growth, type) {
     this.growth = growth;
 
     this.type = type;
+    
+    switch( zoneTool_typeArray[this.type][0] )
+    {
+        case "rubber":
+            this.option = ( option !== undefined )?option:parseFloat($("#dRubberVal").val());
+            break;
+        default:
+            this.option = ( option !== undefined )?option:0;
+            break;
+    }
 
     this.xml = 'Zone';
 
@@ -108,13 +118,25 @@ function Zone(x, y, radius, growth, type) {
         this.y += dy;
     }
 
+    this.getSpecial = function(x)
+    {
+        switch(zoneTool_typeArray[this.type][0])
+        {
+            case "rubber":
+                if( x == 0 ) return " rubberVal=\""+this.option+"\"";
+                break;
+        }
+        
+        return "";
+    }
+
     this.getXML = function() {
         //<Zone effect=""><ShapeCircle radius="" growth=""><Point x="" y=""/></ShapeCircle></Zone>
-        return '<Zone effect="' + zoneTool_typeArray[this.type][0] +'"><ShapeCircle radius=" '+ this.radius +' " growth="'+this.growth+'"><Point x="' + this.x + '" y="' + this.y + '"/></ShapeCircle></Zone>';
+        return '<Zone effect="' + zoneTool_typeArray[this.type][0] +'"'+this.getSpecial(0)+'><ShapeCircle radius=" '+ this.radius +' " growth="'+this.growth+'"><Point x="' + this.x + '" y="' + this.y + '"/></ShapeCircle></Zone>';
     }
 
     this.outputFriendlyXML = function() {
-        gui_writeLog(escapeHtml('<Zone effect="' + zoneTool_typeArray[this.type][0] +'"><ShapeCircle radius=" '+ this.radius +' " growth="'+this.growth+'"><Point x="' + this.x + '" y="' + this.y + '"/></ShapeCircle></Zone>'));
+        gui_writeLog(escapeHtml(this.getXML()));
     }
 
 } 
