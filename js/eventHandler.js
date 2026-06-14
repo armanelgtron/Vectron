@@ -409,11 +409,17 @@ function eventHandler_init() {
                 break;
             case 2:
                 //alert('Middle Mouse button pressed.');
+                eventHandler_space = false;
+                var tool = vectron_toolActive;
+                navigationTool_complete();
+                vectron_toolActive = tool;
                 break;
             case 3:
                 break;
             default:
+            /*
                 alert('You have a strange Mouse!');
+            */
         }
     });
 
@@ -439,6 +445,15 @@ function eventHandler_init() {
                 break;
             case 2:
                 //alert('Middle Mouse button pressed.');
+                eventHandler_space = true;
+                navigationTool_clickX = cursor_realX;
+                navigationTool_clickY = cursor_realY;
+
+                if(navigationTool_startPanX == null)
+                    navigationTool_startPanX = vectron_panX;
+                
+                if(navigationTool_startPanY == null)
+                    navigationTool_startPanY = vectron_panY;
                 break;
             case 3:
                 //alert('Right Mouse button pressed.');
